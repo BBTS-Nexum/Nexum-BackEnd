@@ -16,12 +16,19 @@ vercel login
 
 ### 3. Configurar Variáveis de Ambiente
 
-No dashboard do Vercel, adicione as variáveis:
+No dashboard do Vercel, adicione as variáveis (Settings → Environment Variables):
 
-- `DB_SERVER` - Servidor Azure SQL
-- `DB_DATABASE` - Nome do banco
-- `DB_USERNAME` - Usuário do banco
-- `DB_PASSWORD` - Senha do banco
+- `AZURE_SQL_DRIVER` = `ODBC Driver 18 for SQL Server`
+- `AZURE_SQL_SERVER` = `cesar-abraao.database.windows.net`
+- `AZURE_SQL_PORT` = `1433`
+- `AZURE_SQL_DATABASE` = `stefanini_app`
+- `AZURE_SQL_USERNAME` = `abraaoadmin`
+- `AZURE_SQL_PASSWORD` = `sua-senha-aqui`
+- `AZURE_SQL_ENCRYPT` = `yes`
+- `AZURE_SQL_TRUST_SERVER_CERTIFICATE` = `no`
+- `AZURE_SQL_CONNECTION_TIMEOUT` = `30`
+
+**⚠️ IMPORTANTE:** Não commite o arquivo `.env` com senhas reais!
 
 ### 4. Deploy
 

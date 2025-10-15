@@ -13,10 +13,14 @@
     }
   ],
   "env": {
-    "DB_SERVER": "@db-server",
-    "DB_DATABASE": "@db-database",
-    "DB_USERNAME": "@db-username",
-    "DB_PASSWORD": "@db-password",
-    "DB_DRIVER": "ODBC Driver 18 for SQL Server"
+    "AZURE_SQL_DRIVER": "@azure-sql-driver",
+    "AZURE_SQL_SERVER": "@azure-sql-server",
+    "AZURE_SQL_PORT": "@azure-sql-port",
+    "AZURE_SQL_DATABASE": "@azure-sql-database",
+    "AZURE_SQL_USERNAME": "@azure-sql-username",
+    "AZURE_SQL_PASSWORD": "@azure-sql-password",
+    "AZURE_SQL_ENCRYPT": "@azure-sql-encrypt",
+    "AZURE_SQL_TRUST_SERVER_CERTIFICATE": "@azure-sql-trust-server-certificate",
+    "AZURE_SQL_CONNECTION_TIMEOUT": "@azure-sql-connection-timeout"
   }
 }
