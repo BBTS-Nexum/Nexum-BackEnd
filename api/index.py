@@ -1,8 +1,8 @@
 ﻿from flask import Flask, jsonify, send_from_directory
 from flask_cors import CORS
 from flask_swagger_ui import get_swaggerui_blueprint
-from api.controllers.user_controller import user_bp
-from api.controllers.produto_controller import produto_bp
+from controllers.user_controller import user_bp
+from controllers.produto_controller import produto_bp
 
 app = Flask(__name__)
 CORS(app)
