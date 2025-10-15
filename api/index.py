@@ -1,8 +1,8 @@
 ﻿from flask import Flask, jsonify, send_from_directory
 from flask_cors import CORS
 from flask_swagger_ui import get_swaggerui_blueprint
-from controllers.user_controller import user_bp
-from controllers.produto_controller import produto_bp
+from api.controllers.user_controller import user_bp
+from api.controllers.produto_controller import produto_bp
 
 app = Flask(__name__)
 CORS(app)
@@ -26,7 +26,9 @@ app.register_blueprint(produto_bp)
 @app.route('/swagger.json')
 def swagger_spec():
     """Serve a especificação OpenAPI"""
-    return send_from_directory('.', 'swagger.json')
+    import os
+    root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    return send_from_directory(root_dir, 'swagger.json')
 
 @app.route('/')
 def home():
@@ -36,6 +38,9 @@ def home():
         'docs': '/docs',
         'spec': '/swagger.json'
     })
+
+# Handler para Vercel
+handler = app
 
 if __name__ == '__main__':
     print('\n' + '='*80)

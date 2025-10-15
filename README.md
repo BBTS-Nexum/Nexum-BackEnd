@@ -1,321 +1,1270 @@
-# 📦 Nexum Supply Chain - Backend API# 📦 Nexum Supply Chain - Backend API
+# 🚀 Nexum Supply Chain API# 📦 Nexum Supply Chain - Backend API# 📦 Nexum Supply Chain - Backend API
 
 
 
-> Sistema completo de gerenciamento de cadeia de suprimentos com autenticação segura, rastreabilidade em tempo real e API REST robusta.> Sistema completo de gerenciamento de cadeia de suprimentos com autenticação segura, rastreabilidade em tempo real e API REST robusta.
+> **API REST para gestão inteligente de estoque com classificação ABC, tipologia de materiais e cálculos automatizados de planejamento de compras**
 
 
 
-[![Azure](https://img.shields.io/badge/Azure-SQL_Database-0078D4?logo=microsoftazure)](https://azure.microsoft.com)[![Azure](https://img.shields.io/badge/Azure-SQL_Database-0078D4?logo=microsoftazure)](https://azure.microsoft.com)
-
-[![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python)](https://www.python.org)[![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python)](https://www.python.org)
-
-[![Flask](https://img.shields.io/badge/Flask-3.1.2-000000?logo=flask)](https://flask.palletsprojects.com)[![Flask](https://img.shields.io/badge/Flask-3.1.2-000000?logo=flask)](https://flask.palletsprojects.com)
-
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+Sistema desenvolvido para o **Hackathon Stefanini 2025** - Solução para substituir planilhas manuais por um sistema escalável, transparente e com suporte à decisão baseada em dados.> Sistema completo de gerenciamento de cadeia de suprimentos com autenticação segura, rastreabilidade em tempo real e API REST robusta.> Sistema completo de gerenciamento de cadeia de suprimentos com autenticação segura, rastreabilidade em tempo real e API REST robusta.
 
 
 
-------
+---
 
 
 
-## 📑 Índice## 📑 Índice
+## 📑 Índice[![Azure](https://img.shields.io/badge/Azure-SQL_Database-0078D4?logo=microsoftazure)](https://azure.microsoft.com)[![Azure](https://img.shields.io/badge/Azure-SQL_Database-0078D4?logo=microsoftazure)](https://azure.microsoft.com)
 
 
 
-- [Visão Geral](#-visão-geral)- [Visão Geral](#-visão-geral)
+- [Visão Geral](#-visão-geral)[![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python)](https://www.python.org)[![Python](https://img.shields.io/badge/Python-3.11+-3776AB?logo=python)](https://www.python.org)
 
-- [Quick Start](#-quick-start)- [Quick Start](#-quick-start)
+- [Tecnologias](#-tecnologias)
 
-- [Estrutura do Projeto](#-estrutura-do-projeto)- [Estrutura do Projeto](#-estrutura-do-projeto)
+- [Configuração do Ambiente](#-configuração-do-ambiente)[![Flask](https://img.shields.io/badge/Flask-3.1.2-000000?logo=flask)](https://flask.palletsprojects.com)[![Flask](https://img.shields.io/badge/Flask-3.1.2-000000?logo=flask)](https://flask.palletsprojects.com)
+
+- [Arquitetura](#-arquitetura)
+
+- [Campos do Banco de Dados](#-campos-do-banco-de-dados)[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+- [Cálculos e Regras de Negócio](#-cálculos-e-regras-de-negócio)
+
+- [Endpoints da API](#-endpoints-da-api)
+
+- [Exemplos de Uso](#-exemplos-de-uso)
+
+- [Documentação Swagger](#-documentação-swagger)------
+
+
+
+---
+
+
+
+## 🎯 Visão Geral## 📑 Índice## 📑 Índice
+
+
+
+### O Problema
+
+
+
+Operação com mais de **5.000 SKUs** em **32 CDAs** espalhados pelo Brasil, onde o planejamento de aquisições é feito manualmente em Excel:- [Visão Geral](#-visão-geral)- [Visão Geral](#-visão-geral)
+
+
+
+- ❌ Dados dispersos (ERP, SharePoint, e-mails)- [Quick Start](#-quick-start)- [Quick Start](#-quick-start)
+
+- ❌ Falta de rastreabilidade
+
+- ❌ Decisões lentas baseadas em dados desatualizados- [Estrutura do Projeto](#-estrutura-do-projeto)- [Estrutura do Projeto](#-estrutura-do-projeto)
+
+- ❌ Rupturas de estoque e excessos
 
 - [Configuração do Ambiente](#️-configuração-do-ambiente)- [Configuração do Ambiente](#-configuração-do-ambiente)
 
+### A Solução
+
 - [Banco de Dados](#️-banco-de-dados)- [Banco de Dados](#-banco-de-dados)
+
+Sistema que oferece:
 
 - [Sistema de Autenticação](#-sistema-de-autenticação)- [Sistema de Autenticação](#-sistema-de-autenticação)
 
-- [API Endpoints](#-api-endpoints)- [API Endpoints](#-api-endpoints)
+- ✅ **Visualização em tempo real** via API REST
 
-- [Interface de Testes](#-interface-de-testes)- [Testes](#-testes)
+- ✅ **Centralização** em banco Azure SQL- [API Endpoints](#-api-endpoints)- [API Endpoints](#-api-endpoints)
 
-- [Arquitetura](#️-arquitetura)- [Arquitetura](#-arquitetura)
+- ✅ **Alertas inteligentes** (produtos críticos, cobertura baixa)
 
-- [Troubleshooting](#-troubleshooting)- [Deployment](#-deployment)
+- ✅ **Cálculos automatizados** (ES, FA, QA)- [Interface de Testes](#-interface-de-testes)- [Testes](#-testes)
 
-- [Troubleshooting](#-troubleshooting)
+- ✅ **Sugestões de compra** baseadas em histórico
 
----
-
-
-## 🎯 Visão Geral
+- ✅ **Previsibilidade** com indicadores de cobertura- [Arquitetura](#️-arquitetura)- [Arquitetura](#-arquitetura)
 
 
-O **Nexum Supply Chain Backend** é uma API REST construída com Flask que oferece:
 
-O **Nexum Supply Chain Backend** é uma API REST construída com Flask que oferece:
+---- [Troubleshooting](#-troubleshooting)- [Deployment](#-deployment)
 
-- 🔐 **Autenticação Segura**: Sistema completo de login com bcrypt e validações robustas
 
-- 📊 **Gestão de Usuários**: CRUD completo com diferentes níveis de acesso- 🔐 **Autenticação Segura**: Sistema completo de login com bcrypt e validações robustas
 
-- 🔄 **Níveis Dinâmicos**: Carregamento automático de níveis de acesso do banco- 📊 **Gestão de Usuários**: CRUD completo com diferentes níveis de acesso
+## 🛠 Tecnologias- [Troubleshooting](#-troubleshooting)
 
-- 🛡️ **Segurança**: Senhas hasheadas, validações de email e senha forte- 🔄 **Níveis Dinâmicos**: Carregamento automático de níveis de acesso do banco
+
+
+- **Python 3.13.7** - Linguagem principal---
+
+- **Flask 3.1.2** - Framework web
+
+- **Azure SQL Database** - Banco de dados em nuvem
+
+- **pyodbc 5.2.0** - Conector SQL Server## 🎯 Visão Geral
+
+- **bcrypt 4.1.2** - Hash de senhas
+
+- **flask-cors 6.0.1** - CORS
+
+- **flask-swagger-ui 5.21.0** - Documentação interativaO **Nexum Supply Chain Backend** é uma API REST construída com Flask que oferece:
+
+
+
+---O **Nexum Supply Chain Backend** é uma API REST construída com Flask que oferece:
+
+
+
+## ⚙️ Configuração do Ambiente- 🔐 **Autenticação Segura**: Sistema completo de login com bcrypt e validações robustas
+
+
+
+### 1. Clonar o Repositório- 📊 **Gestão de Usuários**: CRUD completo com diferentes níveis de acesso- 🔐 **Autenticação Segura**: Sistema completo de login com bcrypt e validações robustas
+
+
+
+```bash- 🔄 **Níveis Dinâmicos**: Carregamento automático de níveis de acesso do banco- 📊 **Gestão de Usuários**: CRUD completo com diferentes níveis de acesso
+
+git clone https://github.com/BBTS-Nexum/Nexum-BackEnd.git
+
+cd Nexum-BackEnd- 🛡️ **Segurança**: Senhas hasheadas, validações de email e senha forte- 🔄 **Níveis Dinâmicos**: Carregamento automático de níveis de acesso do banco
+
+```
 
 - 📈 **Rastreabilidade**: Logs detalhados de todas as operações- 🛡️ **Segurança**: Senhas hasheadas, validações de email e senha forte
 
+### 2. Criar Ambiente Virtual
+
 - 🎨 **Interface de Testes**: HTML/JS para testar endpoints facilmente- 📈 **Rastreabilidade**: Logs detalhados de todas as operações
 
-- 🎨 **Interface de Testes**: HTML/JS para testar endpoints facilmente
+```powershell
 
-### ✨ Funcionalidades Principais
+python -m venv NexumEnv- 🎨 **Interface de Testes**: HTML/JS para testar endpoints facilmente
 
-- ✅ Login e cadastro de usuários
+.\NexumEnv\Scripts\Activate.ps1
 
-- ✅ Alteração de senha com validação- ✅ Login e cadastro de usuários
+```### ✨ Funcionalidades Principais
 
-- ✅ Busca de usuários por email, matrícula ou ID- ✅ Alteração de senha com validação
 
-- ✅ Listagem de todos os usuários- ✅ Busca de usuários por email, matrícula ou ID
 
-- ✅ Níveis de acesso dinâmicos (planejador, comprador, fiscal, gestor)- ✅ Listagem de todos os usuários
+### 3. Instalar Dependências- ✅ Login e cadastro de usuários
 
-- ✅ CORS habilitado para integração com frontend- ✅ Níveis de acesso dinâmicos (planejador, comprador, fiscal, gestor)
 
-- ✅ Validações robustas de entrada- ✅ CORS habilitado para integração com frontend
 
-- ✅ Tratamento de erros adequado- ✅ Validações robustas de entrada
+```bash- ✅ Alteração de senha com validação- ✅ Login e cadastro de usuários
 
-- ✅ Tratamento de erros adequado
+pip install -r requirements.txt
 
----
+```- ✅ Busca de usuários por email, matrícula ou ID- ✅ Alteração de senha com validação
 
-## 🚀 Quick Start
 
-### **1. Clone o Repositório**
 
-```bash### **1. Clone o Repositório**
+### 4. Configurar Variáveis de Ambiente- ✅ Listagem de todos os usuários- ✅ Busca de usuários por email, matrícula ou ID
+
+
+
+Crie um arquivo `.env` na raiz:- ✅ Níveis de acesso dinâmicos (planejador, comprador, fiscal, gestor)- ✅ Listagem de todos os usuários
+
+
+
+```env- ✅ CORS habilitado para integração com frontend- ✅ Níveis de acesso dinâmicos (planejador, comprador, fiscal, gestor)
+
+DB_SERVER=seu-servidor.database.windows.net
+
+DB_DATABASE=stefanini_app- ✅ Validações robustas de entrada- ✅ CORS habilitado para integração com frontend
+
+DB_USERNAME=seu-usuario
+
+DB_PASSWORD=sua-senha- ✅ Tratamento de erros adequado- ✅ Validações robustas de entrada
+
+DB_DRIVER=ODBC Driver 18 for SQL Server
+
+```- ✅ Tratamento de erros adequado
+
+
+
+### 5. Executar o Servidor---
+
+
+
+```bash## 🚀 Quick Start
+
+python app.py
+
+```### **1. Clone o Repositório**
+
+
+
+Servidor disponível em: **http://localhost:5000**  ```bash### **1. Clone o Repositório**
+
+Documentação Swagger: **http://localhost:5000/docs**
 
 git clone https://github.com/BBTS-Nexum/Nexum-BackEnd.git```bash
 
+---
+
 cd Nexum-BackEndgit clone https://github.com/BBTS-Nexum/Nexum-BackEnd.git
+
+## 🏗 Arquitetura
 
 ```cd Nexum-BackEnd
 
 ```
 
-### **2. Crie o Ambiente Virtual**
+Nexum-BackEnd/```
 
-```bash### **2. Crie o Ambiente Virtual**
+├── app.py                      # Aplicação principal Flask
 
-# Windows PowerShell```bash
+├── controllers/                # Camada de rotas (endpoints)### **2. Crie o Ambiente Virtual**
 
-python -m venv NexumEnv# Windows PowerShell
+│   ├── user_controller.py
 
-.\NexumEnv\Scripts\Activate.ps1python -m venv NexumEnv
+│   └── produto_controller.py```bash### **2. Crie o Ambiente Virtual**
 
-.\NexumEnv\Scripts\Activate.ps1
+├── services/                   # Camada de lógica de negócio
 
-# Linux/Mac
+│   ├── user_service.py# Windows PowerShell```bash
 
-python3 -m venv NexumEnv# Linux/Mac
+│   └── produto_service.py
 
-source NexumEnv/bin/activatepython3 -m venv NexumEnv
+├── repositories/               # Camada de acesso a dadospython -m venv NexumEnv# Windows PowerShell
 
-```source NexumEnv/bin/activate
+│   ├── user_repository.py
 
-```
+│   └── produto_repository.py.\NexumEnv\Scripts\Activate.ps1python -m venv NexumEnv
 
-### **3. Instale as Dependências**
+├── models/                     # Modelos de dados
 
-```bash### **3. Instale as Dependências**
+│   ├── user.py.\NexumEnv\Scripts\Activate.ps1
 
-pip install -r requirements.txt```bash
+│   └── produto.py
 
-```pip install -r requirements.txt
+├── database/                   # Scripts SQL# Linux/Mac
 
-```
+│   └── create_table.sql
 
-### **4. Configure o Banco de Dados**
+├── swagger.json                # Especificação OpenAPIpython3 -m venv NexumEnv# Linux/Mac
 
-### **4. Configure o Banco de Dados**
+└── requirements.txt            # Dependências Python
 
-Crie o arquivo `.env` com suas credenciais do Azure:
+```source NexumEnv/bin/activatepython3 -m venv NexumEnv
 
-Crie o arquivo `.env` com suas credenciais do Azure:
 
-```bash
+
+**Padrão de Arquitetura**: MVC com Repository Pattern```source NexumEnv/bin/activate
+
+
+
+---```
+
+
+
+## 📊 Campos do Banco de Dados### **3. Instale as Dependências**
+
+
+
+### Tabela: `supply_chain.produtos_estoque````bash### **3. Instale as Dependências**
+
+
+
+#### **Identificação**pip install -r requirements.txt```bash
+
+- `id` (INT) - Chave primária auto-incremento
+
+- `codigo` (NVARCHAR(50)) - Código único do produto```pip install -r requirements.txt
+
+
+
+#### **Classificação**```
+
+- `abc` (CHAR(1)) - Classificação ABC: **'A'** (alta prioridade), **'B'** (média), **'C'** (baixa)
+
+- `tipo` (INT) - Tipologia: **10** (reparável), **19** (testável), **20** (descartável)### **4. Configure o Banco de Dados**
+
+
+
+#### **Peças Boas** (Disponíveis para Uso)### **4. Configure o Banco de Dados**
+
+- `saldo_manut` (INT) - Peças disponíveis no Manut para o CAT
+
+- `provid_compras` (INT) - Peças que irão chegar (compradas)Crie o arquivo `.env` com suas credenciais do Azure:
+
+- `recebimento_esperado` (INT) - Peças recebidas mas ainda não no estoque
+
+- `transito_manut` (INT) - Peças em trânsito entre unidadesCrie o arquivo `.env` com suas credenciais do Azure:
+
+- `stage_manut` (INT) - Peças reservadas
+
+- `recepcao_manut` (INT) - Peças em recebimento```bash
+
+- `pendente_ri` (INT) - Peças entre recepção e recebimento
 
 # Copie o exemplo```bash
 
-Copy-Item .env.example .env# Copie o exemplo
+#### **Peças em Teste**
+
+- `pecas_teste` (INT) - Com técnicos de atendimentoCopy-Item .env.example .env# Copie o exemplo
+
+- `pecas_teste_kit` (INT) - Atendimentos distantes de um CAT
 
 Copy-Item .env.example .env
 
-# Edite com suas credenciais
+#### **Peças para Reparo** (Defeituosas)
 
-notepad .env# Edite com suas credenciais
+- `fornecedor_reparo` (INT) - Com reparador externo# Edite com suas credenciais
 
-```notepad .env
+- `laboratorio` (INT) - Em centros de reparo BBTS
 
-```
+- `wr` (INT) - Aguardando envio para reparonotepad .env# Edite com suas credenciais
 
-Preencha o `.env`:
+- `wrcr` (INT) - Atendidas em CR, aguardando reparador externo
 
-```envPreencha o `.env`:
+- `stage_wr` (INT) - Reservadas para reparo```notepad .env
 
-AZURE_SQL_DRIVER=ODBC Driver 18 for SQL Server```env
 
-AZURE_SQL_SERVER=seu-servidor.database.windows.netAZURE_SQL_DRIVER=ODBC Driver 18 for SQL Server
+
+#### **Métricas e KPIs**```
+
+- `cmm` (DECIMAL(10,2)) - Consumo Médio Mensal
+
+- `coef_perda` (DECIMAL(10,8)) - Percentual histórico de peças irreparáveisPreencha o `.env`:
+
+
+
+#### **Auditoria**```envPreencha o `.env`:
+
+- `data_criacao` (DATETIME2) - Data de criação do registro
+
+- `data_atualizacao` (DATETIME2) - Última atualizaçãoAZURE_SQL_DRIVER=ODBC Driver 18 for SQL Server```env
+
+- `usuario_criacao` (NVARCHAR(100)) - Quem criou
+
+- `usuario_atualizacao` (NVARCHAR(100)) - Quem atualizouAZURE_SQL_SERVER=seu-servidor.database.windows.netAZURE_SQL_DRIVER=ODBC Driver 18 for SQL Server
+
+- `ativo` (BIT) - Registro ativo/inativo
 
 AZURE_SQL_PORT=1433AZURE_SQL_SERVER=seu-servidor.database.windows.net
 
+---
+
 AZURE_SQL_DATABASE=stefanini_appAZURE_SQL_PORT=1433
+
+## 🧮 Cálculos e Regras de Negócio
 
 AZURE_SQL_USERNAME=seu-usuarioAZURE_SQL_DATABASE=seu-database
 
-AZURE_SQL_PASSWORD=sua-senhaAZURE_SQL_USERNAME=seu-usuario
+### 1️⃣ **Peças Boas (Total)**
 
-AZURE_SQL_ENCRYPT=yesAZURE_SQL_PASSWORD=sua-senha
+```AZURE_SQL_PASSWORD=sua-senhaAZURE_SQL_USERNAME=seu-usuario
+
+Peças_Boas = saldo_manut + provid_compras + recebimento_esperado + 
+
+             transito_manut + stage_manut + recepcao_manut + pendente_riAZURE_SQL_ENCRYPT=yesAZURE_SQL_PASSWORD=sua-senha
+
+```
 
 AZURE_SQL_TRUST_SERVER_CERTIFICATE=noAZURE_SQL_ENCRYPT=yes
 
-AZURE_SQL_CONNECTION_TIMEOUT=30AZURE_SQL_TRUST_SERVER_CERTIFICATE=no
+### 2️⃣ **Peças em Teste (Total)**
 
-```AZURE_SQL_CONNECTION_TIMEOUT=30
+```AZURE_SQL_CONNECTION_TIMEOUT=30AZURE_SQL_TRUST_SERVER_CERTIFICATE=no
+
+Peças_Teste = pecas_teste + pecas_teste_kit
+
+``````AZURE_SQL_CONNECTION_TIMEOUT=30
+
+
+
+### 3️⃣ **Peças para Reparo (Total)**```
+
+```
+
+Peças_Reparo = fornecedor_reparo + laboratorio + wr + wrcr + stage_wr### **5. Execute os Scripts SQL**
 
 ```
 
 ### **5. Execute os Scripts SQL**
 
-### **5. Execute os Scripts SQL**
+### 4️⃣ **Saldo Total (por Tipo)**
 
 No Azure Data Studio, execute na ordem:
 
-1. `database/create_users_table.sql` - Cria tabela de usuáriosNo Azure Data Studio, execute na ordem:
+**Para T-10 e T-19 (Reparáveis/Testáveis):**
 
-2. `database/create_table.sql` - Cria tabela de produtos (opcional)1. `database/create_users_table.sql` - Cria tabela de usuários
+```1. `database/create_users_table.sql` - Cria tabela de usuáriosNo Azure Data Studio, execute na ordem:
 
-2. `database/create_table.sql` - Cria tabela de produtos (opcional)
+Saldo_Total = Peças_Boas + Peças_Teste + Peças_Reparo - (Peças_Reparo × coef_perda)
 
-### **6. Inicie o Servidor**
+```2. `database/create_table.sql` - Cria tabela de produtos (opcional)1. `database/create_users_table.sql` - Cria tabela de usuários
+
+
+
+**Para T-20 (Descartáveis):**2. `database/create_table.sql` - Cria tabela de produtos (opcional)
+
+```
+
+Saldo_Total = Peças_Boas### **6. Inicie o Servidor**
+
+```
 
 ```bash### **6. Inicie o Servidor**
 
+### 5️⃣ **Estoque de Segurança (ES)**
+
 python app.py```bash
 
-```python app.py
+| ABC | Tipo | Fórmula |
+
+|-----|------|---------|```python app.py
+
+| A | T-10 ou T-19 | `ES = 4 × CMM` |
+
+| A | T-20 | `ES = 1.5 × CMM` |```
+
+| B ou C | T-10 ou T-19 | `ES = 5 × CMM` |
+
+| B ou C | T-20 | `ES = 2.5 × CMM` |✅ Servidor rodando em: **http://localhost:5000**
+
+
+
+### 6️⃣ **Fator de Ajuste (FA)**✅ Servidor rodando em: http://localhost:5000
+
+
+
+**Para T-10 e T-19:**### **7. Teste a API**
 
 ```
 
-✅ Servidor rodando em: **http://localhost:5000**
+FA = ES + (4 × CMM × coef_perda)Abra o arquivo de testes no navegador:
 
-✅ Servidor rodando em: http://localhost:5000
-
-### **7. Teste a API**
-
-Abra o arquivo de testes no navegador:
+```
 
 ```bashAbra o arquivo de testes no navegador:
 
-# Abre interface de testes```bash
+**Para T-20:**
 
-.\abrir_teste.bat# Abre interface de testes
+```# Abre interface de testes```bash
 
-.\abrir_teste.bat
+FA = ES + (4 × CMM)
 
-# Ou abra manualmente
+```.\abrir_teste.bat# Abre interface de testes
 
-start test_login.html# Ou abra manualmente
+
+
+*O `4 × CMM` representa a cobertura de leadtime (~4 meses)*.\abrir_teste.bat
+
+
+
+### 7️⃣ **Quantidade a Adquirir (QA)**# Ou abra manualmente
+
+```
+
+QA = max(0, FA - Saldo_Total)start test_login.html# Ou abra manualmente
+
+```
 
 ```start test_login.html
 
+- **QA > 0**: Precisa comprar
+
+- **QA = 0**: Estoque suficiente```
+
+
+
+### 8️⃣ **Cobertura em Meses**---
+
 ```
 
----
-
-## 📁 Estrutura do Projeto
-
+Cobertura = Saldo_Total / CMM## 📁 Estrutura do Projeto
 
 ```
 
-Nexum-BackEnd/```
 
-│Nexum-BackEnd/
 
-├── app.py                      # 🚀 Aplicação Flask principal│
+### 9️⃣ **Status do Estoque**```
 
-├── requirements.txt            # 📦 Dependências Python├── app.py                      # Aplicação Flask principal
 
-├── .env                        # 🔐 Configurações (não commitado)├── requirements.txt            # Dependências Python
 
-├── .env.example               # 📄 Exemplo de configurações├── .env                        # Configurações (não commitado)
+| Status | Condição |Nexum-BackEnd/```
 
-│├── .env.example               # Exemplo de configurações
+|--------|----------|
+
+| **critico** | QA > 0 (precisa comprar) |│Nexum-BackEnd/
+
+| **baixo** | Cobertura < 2 meses |
+
+| **ok** | Cobertura ≥ 2 meses |├── app.py                      # 🚀 Aplicação Flask principal│
+
+
+
+---├── requirements.txt            # 📦 Dependências Python├── app.py                      # Aplicação Flask principal
+
+
+
+## 🌐 Endpoints da API├── .env                        # 🔐 Configurações (não commitado)├── requirements.txt            # Dependências Python
+
+
+
+### **Autenticação**├── .env.example               # 📄 Exemplo de configurações├── .env                        # Configurações (não commitado)
+
+
+
+#### `POST /api/usuarios/login`│├── .env.example               # Exemplo de configurações
+
+Login de usuário
 
 ├── models/                    # 🎯 Modelos de dados│
 
-│   └── user.py               #    └─ Classe User├── models/                    # Modelos de dados
+**Body:**
 
-││   └── user.py               # Classe User
+```json│   └── user.py               #    └─ Classe User├── models/                    # Modelos de dados
 
-├── repositories/             # 🗄️ Camada de acesso a dados│
+{
+
+  "email": "admin@nexum.com",││   └── user.py               # Classe User
+
+  "senha": "senha123"
+
+}├── repositories/             # 🗄️ Camada de acesso a dados│
+
+```
 
 │   └── user_repository.py   #    └─ Queries SQL para usuários├── repositories/             # Camada de acesso a dados
 
-││   └── user_repository.py   # Queries SQL para usuários
+**Response 200:**
 
-├── services/                # ⚙️ Lógica de negócio│
+```json││   └── user_repository.py   # Queries SQL para usuários
 
-│   └── user_service.py     #    └─ Validações e bcrypt├── services/                # Lógica de negócio
+{
 
-││   └── user_service.py     # Validações e bcrypt
+  "id": 1,├── services/                # ⚙️ Lógica de negócio│
+
+  "nome": "Admin",
+
+  "email": "admin@nexum.com",│   └── user_service.py     #    └─ Validações e bcrypt├── services/                # Lógica de negócio
+
+  "nivel_acesso": 1
+
+}││   └── user_service.py     # Validações e bcrypt
+
+```
 
 ├── controllers/            # 🎮 Rotas da API│
 
-│   └── user_controller.py #    └─ Endpoints REST├── controllers/            # Rotas da API
+#### `POST /api/usuarios/registrar`
 
-││   └── user_controller.py # Endpoints REST
+Registrar novo usuário│   └── user_controller.py #    └─ Endpoints REST├── controllers/            # Rotas da API
 
-├── database/              # 💾 Scripts SQL│
 
-│   ├── create_users_table.sql├── database/              # Scripts SQL
 
-│   ├── create_table.sql│   ├── create_users_table.sql
+**Body:**││   └── user_controller.py # Endpoints REST
 
-│   └── README.md│   ├── create_table.sql
+```json
 
-││   └── README.md
+{├── database/              # 💾 Scripts SQL│
 
-├── aux_files/            # 🛠️ Utilitários│
+  "nome": "João Silva",
 
-│   ├── sql.py           #    ├─ Helper de conexão├── aux_files/            # Utilitários
+  "email": "joao@nexum.com",│   ├── create_users_table.sql├── database/              # Scripts SQL
+
+  "senha": "senha123",
+
+  "nivel_acesso": 2│   ├── create_table.sql│   ├── create_users_table.sql
+
+}
+
+```│   └── README.md│   ├── create_table.sql
+
+
+
+---││   └── README.md
+
+
+
+### **Usuários**├── aux_files/            # 🛠️ Utilitários│
+
+
+
+#### `GET /api/usuarios/`│   ├── sql.py           #    ├─ Helper de conexão├── aux_files/            # Utilitários
+
+Listar todos os usuários
 
 │   ├── test_connection.py  # └─ Teste de conexão│   ├── sql.py           # Helper de conexão
 
-│   └── analise_dados.py    #    └─ Análise de dados│   ├── test_connection.py
+#### `GET /api/usuarios/niveis-acesso`
 
-││   └── analise_dados.py
+Retorna mapeamento de níveis de acesso│   └── analise_dados.py    #    └─ Análise de dados│   ├── test_connection.py
 
-├── test_login.html      # 🧪 Interface de testes│
 
-├── test_login.js        # 📝 Lógica de testes├── test_login.html      # Interface de testes
+
+---││   └── analise_dados.py
+
+
+
+### **Produtos - CRUD**├── test_login.html      # 🧪 Interface de testes│
+
+
+
+#### `GET /api/produtos/`├── test_login.js        # 📝 Lógica de testes├── test_login.html      # Interface de testes
+
+Listar produtos com paginação
 
 ├── test_api.py         # 🤖 Testes automatizados├── test_login.js        # Lógica de testes
 
-├── debug_login.py      # 🐛 Debug de login├── test_api.py         # Testes automatizados
+**Query Params:**
+
+- `page` (default: 1)├── debug_login.py      # 🐛 Debug de login├── test_api.py         # Testes automatizados
+
+- `per_page` (default: 50)
 
 ├── gerar_hash.py       # 🔒 Utilitário para gerar hash├── debug_login.py      # Debug de login
 
-├── abrir_teste.bat     # ⚡ Script para abrir testes├── gerar_hash.py       # Utilitário para gerar hash
+#### `POST /api/produtos/`
 
-││
+Criar novo produto├── abrir_teste.bat     # ⚡ Script para abrir testes├── gerar_hash.py       # Utilitário para gerar hash
 
-└── NexumEnv/          # 🐍 Ambiente virtual (não commitado)└── NexumEnv/          # Ambiente virtual (não commitado)
 
-``````
+
+**Body:**││
+
+```json
+
+{└── NexumEnv/          # 🐍 Ambiente virtual (não commitado)└── NexumEnv/          # Ambiente virtual (não commitado)
+
+  "codigo": "MAT-001",
+
+  "abc": "A",``````
+
+  "tipo": 10,
+
+  "saldo_manut": 100,
+
+  "cmm": 25.5,
+
+  "coef_perda": 0.05------
+
+}
+
+```
+
+
+
+#### `GET /api/produtos/{id}`## ⚙️ Configuração do Ambiente## ⚙️ Configuração do Ambiente
+
+Buscar produto por ID
+
+
+
+#### `GET /api/produtos/codigo/{codigo}`
+
+Buscar produto por código### 📋 Variáveis de Ambiente (.env)### Variáveis de Ambiente (.env)
+
+
+
+#### `PUT /api/produtos/{id}`
+
+Atualizar produto
+
+O sistema usa um arquivo `.env` para configurações sensíveis:O sistema usa um arquivo `.env` para configurações sensíveis:
+
+#### `DELETE /api/produtos/{id}`
+
+Deletar produto (soft delete)
+
+
+
+---```env```env
+
+
+
+### **Produtos - Consultas**# Azure SQL Database# Azure SQL Database
+
+
+
+#### `GET /api/produtos/criticos`AZURE_SQL_DRIVER=ODBC Driver 18 for SQL ServerAZURE_SQL_DRIVER=ODBC Driver 18 for SQL Server
+
+Produtos com estoque crítico
+
+AZURE_SQL_SERVER=nexum-server.database.windows.netAZURE_SQL_SERVER=nexum-server.database.windows.net
+
+**Query Params:**
+
+- `limit` (default: 100, max: 1000)AZURE_SQL_PORT=1433AZURE_SQL_PORT=1433
+
+
+
+#### `GET /api/produtos/estatisticas`AZURE_SQL_DATABASE=stefanini_appAZURE_SQL_DATABASE=stefanini_app
+
+Estatísticas gerais do estoque
+
+AZURE_SQL_USERNAME=nexumadminAZURE_SQL_USERNAME=nexumadmin
+
+**Response:**
+
+```jsonAZURE_SQL_PASSWORD=SuaSenhaSegura123!AZURE_SQL_PASSWORD=SuaSenhaSegura123!
+
+{
+
+  "success": true,AZURE_SQL_ENCRYPT=yesAZURE_SQL_ENCRYPT=yes
+
+  "estatisticas": {
+
+    "total_produtos": 1250,AZURE_SQL_TRUST_SERVER_CERTIFICATE=noAZURE_SQL_TRUST_SERVER_CERTIFICATE=no
+
+    "produtos_criticos": 45,
+
+    "por_abc": {AZURE_SQL_CONNECTION_TIMEOUT=30AZURE_SQL_CONNECTION_TIMEOUT=30
+
+      "A": 300,
+
+      "B": 450,``````
+
+      "C": 500
+
+    },
+
+    "por_tipo": {
+
+      "reparavel": 600,### 🔑 Obter Credenciais do Azure### Obter Credenciais do Azure
+
+      "testavel": 400,
+
+      "descartavel": 250
+
+    }
+
+  }1. Acesse https://portal.azure.com1. Acesse https://portal.azure.com
+
+}
+
+```2. Navegue até seu **SQL Database**2. Navegue até seu SQL Database
+
+
+
+---3. Clique em **"Connection strings"**3. Clique em **"Connection strings"**
+
+
+
+### **Indicadores e Planejamento**4. Copie a string **ODBC**4. Copie a string **ODBC**
+
+
+
+#### `GET /api/produtos/{id}/indicadores`5. Extraia os valores para o `.env`5. Extraia os valores para o `.env`
+
+Retorna todos os indicadores calculados para um produto
+
+
+
+**Response 200:**
+
+```json**Exemplo de connection string do Azure:**### Configurar Firewall do Azure
+
+{
+
+  "success": true,```
+
+  "produto": {
+
+    "id": 1,Driver={ODBC Driver 18 for SQL Server};⚠️ **IMPORTANTE**: Adicione seu IP ao firewall!
+
+    "codigo": "MAT-001",
+
+    "abc": "A",Server=tcp:nexum-server.database.windows.net,1433;
+
+    "tipo": 10,
+
+    "tipo_nome": "reparavel",Database=stefanini_app;1. No Azure Portal, vá ao **SQL Server** (não Database)
+
+    "saldo_manut": 100,
+
+    "cmm": 25.5,Uid=nexumadmin;2. Menu lateral → **"Networking"**
+
+    "coef_perda": 0.05,
+
+    "saldo_total": 185.5,Pwd={your_password_here};3. Clique **"Add client IP"**
+
+    "indicadores": {
+
+      "pecas_boas": 150,Encrypt=yes;4. Ative **"Allow Azure services..."**
+
+      "pecas_teste": 20,
+
+      "pecas_reparo": 30,```5. Clique **"Save"**
+
+      "estoque_seguranca": 102,
+
+      "fator_ajuste": 107.1,
+
+      "quantidade_adquirir": 0,
+
+      "cobertura_meses": 7.27,**Como preencher o .env:**### Dependências Principais
+
+      "status": "ok"
+
+    }- `AZURE_SQL_SERVER`: nexum-server.database.windows.net (sem `tcp:` e sem `,1433`)
+
+  }
+
+}- `AZURE_SQL_DATABASE`: stefanini_app```
+
+```
+
+- `AZURE_SQL_USERNAME`: nexumadminFlask==3.1.2           # Framework web
+
+#### `GET /api/produtos/necessidade-compra`
+
+Lista produtos que precisam ser comprados (QA > 0)- `AZURE_SQL_PASSWORD`: Sua senha realflask-cors==6.0.1      # CORS support
+
+
+
+**Query Params:**bcrypt==4.1.2          # Hash de senhas
+
+- `limit` (default: 100, max: 1000)
+
+### 🔥 Configurar Firewall do Azurepyodbc==5.2.0          # Conexão SQL Server
+
+**Response:**
+
+```jsonpython-dotenv==1.0.1   # Variáveis de ambiente
+
+{
+
+  "success": true,⚠️ **MUITO IMPORTANTE**: O Azure bloqueia todas as conexões por padrão!flasgger==0.9.7.1      # Documentação Swagger (futuro)
+
+  "total": 15,
+
+  "produtos": [```
+
+    {
+
+      "codigo": "MAT-005",1. No Azure Portal, vá ao **SQL Server** (não o Database)
+
+      "abc": "A",
+
+      "tipo_nome": "descartavel",2. Menu lateral → **"Networking"** ou **"Firewalls and virtual networks"**---
+
+      "saldo_total": 20,
+
+      "indicadores": {3. Clique **"Add client IP"** (adiciona seu IP automaticamente)
+
+        "quantidade_adquirir": 45.5,
+
+        "cobertura_meses": 0.8,4. Ative **"Allow Azure services and resources to access this server"**## 🗄️ Banco de Dados
+
+        "status": "critico"
+
+      }5. Clique **"Save"**
+
+    }
+
+  ]### Tabela: `supply_chain.usuarios`
+
+}
+
+```### 📦 Dependências Principais
+
+
+
+#### `GET /api/produtos/cobertura-baixa````sql
+
+Lista produtos com cobertura menor que X meses
+
+```txtCREATE TABLE supply_chain.usuarios (
+
+**Query Params:**
+
+- `meses` (default: 2)Flask==3.1.2           # Framework web    id INT IDENTITY(1,1) PRIMARY KEY,
+
+- `limit` (default: 100, max: 1000)
+
+flask-cors==6.0.1      # CORS support    email NVARCHAR(255) NOT NULL UNIQUE,
+
+---
+
+bcrypt==4.1.2          # Hash de senhas    senha VARCHAR(255) NOT NULL,          -- Hash bcrypt
+
+### **Tipologia**
+
+pyodbc==5.2.0          # Conexão SQL Server    matricula NVARCHAR(50) NOT NULL UNIQUE,
+
+#### `GET /api/produtos/tipos`
+
+Retorna tipos de materiais disponíveispython-dotenv==1.0.1   # Variáveis de ambiente    nivel_acesso NVARCHAR(50) NOT NULL,   
+
+
+
+**Response:**pytest==8.4.0          # Testes    data_criacao DATETIME2 NOT NULL DEFAULT GETDATE(),
+
+```json
+
+{coverage==7.11.0       # Cobertura de testes    data_atualizacao DATETIME2 NOT NULL DEFAULT GETDATE(),
+
+  "success": true,
+
+  "tipos": [```    
+
+    {
+
+      "codigo": 10,    CONSTRAINT CK_usuarios_nivel_acesso 
+
+      "nome": "reparavel",
+
+      "descricao": "Peças 100% reparáveis",---        CHECK (nivel_acesso IN ('planejador', 'comprador', 'fiscal', 'gestor')),
+
+      "emoji": "♻️",
+
+      "calculo_saldo": "saldo + teste + reparo - perdas"    CONSTRAINT CK_usuarios_email_valido 
+
+    },
+
+    {## 🗄️ Banco de Dados        CHECK (email LIKE '%_@__%.__%')
+
+      "codigo": 19,
+
+      "nome": "testavel",)
+
+      "descricao": "Peças passíveis de teste",
+
+      "emoji": "🔍",### 📊 Tabela: `supply_chain.usuarios````
+
+      "calculo_saldo": "saldo + teste + reparo - perdas"
+
+    },
+
+    {
+
+      "codigo": 20,```sql### Níveis de Acesso
+
+      "nome": "descartavel",
+
+      "descricao": "Peças de uso único",CREATE TABLE supply_chain.usuarios (
+
+      "emoji": "🗑️",
+
+      "calculo_saldo": "apenas saldo"    id INT IDENTITY(1,1) PRIMARY KEY,- **planejador**: Planejador de Supply Chain
+
+    }
+
+  ]    email NVARCHAR(255) NOT NULL UNIQUE,- **comprador**: Responsável por compras
+
+}
+
+```    senha VARCHAR(255) NOT NULL,          -- Hash bcrypt- **fiscal**: Fiscal de contratos
+
+
+
+---    matricula NVARCHAR(50) NOT NULL UNIQUE,- **gestor**: Gestor/Administrador
+
+
+
+## 💡 Exemplos de Uso    nivel_acesso NVARCHAR(50) NOT NULL,   
+
+
+
+### Python    data_criacao DATETIME2 NOT NULL DEFAULT GETDATE(),### Índices
+
+
+
+```python    data_atualizacao DATETIME2 NOT NULL DEFAULT GETDATE(),
+
+import requests
+
+    ```sql
+
+# Login
+
+response = requests.post('http://localhost:5000/api/usuarios/login', json={    CONSTRAINT CK_usuarios_nivel_acesso -- Performance em login
+
+    'email': 'admin@nexum.com',
+
+    'senha': 'senha123'        CHECK (nivel_acesso IN ('planejador', 'comprador', 'fiscal', 'gestor')),CREATE NONCLUSTERED INDEX IX_usuarios_email 
+
+})
+
+user = response.json()    CONSTRAINT CK_usuarios_email_valido     ON supply_chain.usuarios(email)
+
+
+
+# Listar produtos        CHECK (email LIKE '%_@__%.__%')
+
+response = requests.get('http://localhost:5000/api/produtos/', params={
+
+    'page': 1,)-- Performance em busca por matrícula  
+
+    'per_page': 10
+
+})```CREATE NONCLUSTERED INDEX IX_usuarios_matricula 
+
+produtos = response.json()
+
+    ON supply_chain.usuarios(matricula)
+
+# Ver indicadores de um produto
+
+response = requests.get('http://localhost:5000/api/produtos/1/indicadores')### 👥 Níveis de Acesso
+
+indicadores = response.json()
+
+print(f"QA: {indicadores['produto']['indicadores']['quantidade_adquirir']}")-- Performance em filtro por nível
+
+
+
+# Listar produtos que precisam de compra| Nível | Descrição | Permissões |CREATE NONCLUSTERED INDEX IX_usuarios_nivel_acesso 
+
+response = requests.get('http://localhost:5000/api/produtos/necessidade-compra')
+
+para_comprar = response.json()|-------|-----------|------------|    ON supply_chain.usuarios(nivel_acesso)
+
+print(f"Total a comprar: {para_comprar['total']}")
+
+```| **planejador** | Planejador de Supply Chain | Visualização e análise de dados |```
+
+
+
+### cURL| **comprador** | Responsável por compras | Gestão de pedidos e fornecedores |
+
+
+
+```bash| **fiscal** | Fiscal de contratos | Auditoria e conformidade |---
+
+# Login
+
+curl -X POST http://localhost:5000/api/usuarios/login \| **gestor** | Gestor/Administrador | Acesso total ao sistema |
+
+  -H "Content-Type: application/json" \
+
+  -d '{"email":"admin@nexum.com","senha":"senha123"}'## 🔐 Sistema de Autenticação
+
+
+
+# Criar produto### 📈 Índices para Performance
+
+curl -X POST http://localhost:5000/api/produtos/ \
+
+  -H "Content-Type: application/json" \---
+
+  -d '{
+
+    "codigo": "MAT-999",```sql
+
+    "abc": "A",
+
+    "tipo": 10,-- Performance em login## 📁 Estrutura do Projeto
+
+    "saldo_manut": 50,
+
+    "cmm": 15.0,CREATE NONCLUSTERED INDEX IX_usuarios_email 
+
+    "coef_perda": 0.03
+
+  }'    ON supply_chain.usuarios(email)```
+
+
+
+# Ver indicadoresNexum-BackEnd/
+
+curl http://localhost:5000/api/produtos/1/indicadores
+
+-- Performance em busca por matrícula  ├── app.py                      # Aplicação principal Flask
+
+# Produtos críticos
+
+curl http://localhost:5000/api/produtos/necessidade-compra?limit=50CREATE NONCLUSTERED INDEX IX_usuarios_matricula ├── analise_dados.py            # Script de análise de dados
+
+```
+
+    ON supply_chain.usuarios(matricula)├── requirements.txt            # Dependências Python
+
+### JavaScript (Fetch API)
+
+├── .env.example                # Template de configuração
+
+```javascript
+
+// Listar produtos com cobertura baixa-- Performance em filtro por nível├── .gitignore                  # Arquivos ignorados pelo Git
+
+fetch('http://localhost:5000/api/produtos/cobertura-baixa?meses=3')
+
+  .then(res => res.json())CREATE NONCLUSTERED INDEX IX_usuarios_nivel_acesso │
+
+  .then(data => {
+
+    console.log(`${data.total} produtos com cobertura < 3 meses`);    ON supply_chain.usuarios(nivel_acesso)├── database/                   # Scripts e docs do banco de dados
+
+    data.produtos.forEach(p => {
+
+      console.log(`${p.codigo}: ${p.indicadores.cobertura_meses} meses`);```│   ├── create_table.sql        # Criação de tabelas, views, SPs
+
+    });
+
+  });│   ├── insert_data.py          # Script Python para inserção
+
+
+
+// Criar produto---│   ├── generate_inserts.py     # Gerador de INSERTs SQL
+
+fetch('http://localhost:5000/api/produtos/', {
+
+  method: 'POST',│   ├── insert_data.sql         # INSERTs gerados (não commitado)
+
+  headers: { 'Content-Type': 'application/json' },
+
+  body: JSON.stringify({## 🔐 Sistema de Autenticação│   └── README.md               # Documentação do banco
+
+    codigo: 'MAT-888',
+
+    abc: 'B',│
+
+    tipo: 19,
+
+    saldo_manut: 75,### 🏗️ Arquitetura em Camadas├── dados_hackathon.csv         # Dados de entrada (5.000 produtos)
+
+    cmm: 20.5
+
+  })├── SETUP_DATABASE.md           # Guia de setup do banco
+
+})
+
+.then(res => res.json())```└── README.md                   # Este arquivo
+
+.then(data => console.log('Produto criado:', data));
+
+```┌─────────────────────────────────────────────────────────────┐```
+
+
+
+---│                    CLIENT (Frontend/Postman)                │
+
+
+
+## 📖 Documentação Swagger└──────────────────────┬──────────────────────────────────────┘---
+
+
+
+Acesse a documentação interativa completa em:                       │ HTTP Request (JSON)
+
+
+
+**http://localhost:5000/docs**                       ▼## 🗄️ Banco de Dados
+
+
+
+- ✅ Todos os endpoints documentados┌─────────────────────────────────────────────────────────────┐
+
+- ✅ Exemplos de request/response
+
+- ✅ Interface "Try it out" para testar│              CONTROLLER (controllers/user_controller.py)     │### **Tabela Principal**
+
+- ✅ Especificação OpenAPI 2.0
+
+│  • Recebe requisições HTTP                                   │`supply_chain.produtos_estoque` - Controle completo de estoque
+
+Para ver apenas a especificação JSON:
+
+│  • Valida dados de entrada                                   │
+
+**http://localhost:5000/swagger.json**
+
+│  • Retorna respostas JSON                                    │### **Views Disponíveis**
+
+---
+
+└──────────────────────┬──────────────────────────────────────┘1. `vw_produtos_criticos` - Produtos com risco de ruptura
+
+## 📝 FAQ
+
+                       │ Chama Service2. `vw_dashboard_executivo` - KPIs gerenciais
+
+### **1. O que são "peças boas"?**
+
+Peças disponíveis no Manut para uso pelo CAT, incluindo saldo_manut, provid_compras, recebimento_esperado, etc.                       ▼3. `vw_analise_abc` - Análise por classificação
+
+
+
+### **2. Como funciona o cálculo de CMM?**┌─────────────────────────────────────────────────────────────┐
+
+CMM = Total consumido nos últimos 6 meses / 6
+
+│               SERVICE (services/user_service.py)             │### **Stored Procedures**
+
+### **3. O que é o Coeficiente de Perda?**
+
+Percentual histórico de peças que não puderam ser reparadas.│  • Validações de negócio                                     │1. `sp_calcular_necessidade_compra` - Cálculo inteligente de compras
+
+
+
+### **4. Por que o saldo total difere por tipo?**│  • Hash de senha (bcrypt)                                    │
+
+- **T-10/T-19**: Inclui peças em reparo (podem voltar)
+
+- **T-20**: Apenas peças boas (descartáveis não retornam)│  • Lógica de autenticação                                    │### **Queries Úteis**
+
+
+
+### **5. Como interpretar o QA?**└──────────────────────┬──────────────────────────────────────┘
+
+- **QA = 0**: Estoque suficiente
+
+- **QA > 0**: Quantidade que deve ser comprada imediatamente                       │ Chama Repository```sql
+
+
+
+### **6. O que é o Fator de Ajuste (FA)?**                       ▼-- Ver produtos críticos
+
+Ponto de pedido que considera estoque de segurança + leadtime + perdas
+
+┌─────────────────────────────────────────────────────────────┐SELECT * FROM supply_chain.vw_produtos_criticos
+
+### **7. Como funciona a cobertura?**
+
+Indica quantos meses o estoque atual dura com base no CMM│          REPOSITORY (repositories/user_repository.py)        │WHERE nivel_criticidade = 'CRÍTICO';
+
+
+
+---│  • Queries SQL                                               │
+
+
+
+## 🚀 Roadmap│  • CRUD no banco de dados                                    │-- Calcular necessidade de compra (30 dias, fator 1.5)
+
+
+
+- [ ] Histórico de consumo (tabela separada)│  • Conversão User ↔ Database                                 │EXEC supply_chain.sp_calcular_necessidade_compra 
+
+- [ ] Integração com ERP
+
+- [ ] Alertas via e-mail/webhook└──────────────────────┬──────────────────────────────────────┘  @lead_time_dias = 30,
+
+- [ ] Dashboard em tempo real
+
+- [ ] Previsão de demanda com ML                       │ PyODBC  @fator_seguranca = 1.5;
+
+- [ ] Relatórios em PDF
+
+- [ ] Auditoria completa de ações                       ▼
+
+
+
+---┌─────────────────────────────────────────────────────────────┐-- Dashboard executivo
+
+
+
+## 👥 Equipe BBTS-Nexum│              DATABASE (Azure SQL - supply_chain.usuarios)    │SELECT * FROM supply_chain.vw_dashboard_executivo;
+
+
+
+Desenvolvido com ❤️ para o Hackathon Stefanini 2025└─────────────────────────────────────────────────────────────┘```
+
+
+
+---```
+
+
+
+## 📄 Licença📖 **Documentação completa:** [database/README.md](database/README.md)
+
+
+
+MIT License - Veja [LICENSE](LICENSE) para mais detalhes### 🔒 Segurança
 
 
 
@@ -323,321 +1272,13 @@ Nexum-BackEnd/```
 
 
 
-## ⚙️ Configuração do Ambiente## ⚙️ Configuração do Ambiente
+**🔗 Links Úteis:**#### Hash de Senhas (bcrypt)
 
+- Repositório: https://github.com/BBTS-Nexum/Nexum-BackEnd
 
+- Documentação Swagger: http://localhost:5000/docs## 🔧 Tecnologias
 
-### 📋 Variáveis de Ambiente (.env)### Variáveis de Ambiente (.env)
-
-
-
-O sistema usa um arquivo `.env` para configurações sensíveis:O sistema usa um arquivo `.env` para configurações sensíveis:
-
-
-
-```env```env
-
-# Azure SQL Database# Azure SQL Database
-
-AZURE_SQL_DRIVER=ODBC Driver 18 for SQL ServerAZURE_SQL_DRIVER=ODBC Driver 18 for SQL Server
-
-AZURE_SQL_SERVER=nexum-server.database.windows.netAZURE_SQL_SERVER=nexum-server.database.windows.net
-
-AZURE_SQL_PORT=1433AZURE_SQL_PORT=1433
-
-AZURE_SQL_DATABASE=stefanini_appAZURE_SQL_DATABASE=stefanini_app
-
-AZURE_SQL_USERNAME=nexumadminAZURE_SQL_USERNAME=nexumadmin
-
-AZURE_SQL_PASSWORD=SuaSenhaSegura123!AZURE_SQL_PASSWORD=SuaSenhaSegura123!
-
-AZURE_SQL_ENCRYPT=yesAZURE_SQL_ENCRYPT=yes
-
-AZURE_SQL_TRUST_SERVER_CERTIFICATE=noAZURE_SQL_TRUST_SERVER_CERTIFICATE=no
-
-AZURE_SQL_CONNECTION_TIMEOUT=30AZURE_SQL_CONNECTION_TIMEOUT=30
-
-``````
-
-
-
-### 🔑 Obter Credenciais do Azure### Obter Credenciais do Azure
-
-
-
-1. Acesse https://portal.azure.com1. Acesse https://portal.azure.com
-
-2. Navegue até seu **SQL Database**2. Navegue até seu SQL Database
-
-3. Clique em **"Connection strings"**3. Clique em **"Connection strings"**
-
-4. Copie a string **ODBC**4. Copie a string **ODBC**
-
-5. Extraia os valores para o `.env`5. Extraia os valores para o `.env`
-
-
-
-**Exemplo de connection string do Azure:**### Configurar Firewall do Azure
-
-```
-
-Driver={ODBC Driver 18 for SQL Server};⚠️ **IMPORTANTE**: Adicione seu IP ao firewall!
-
-Server=tcp:nexum-server.database.windows.net,1433;
-
-Database=stefanini_app;1. No Azure Portal, vá ao **SQL Server** (não Database)
-
-Uid=nexumadmin;2. Menu lateral → **"Networking"**
-
-Pwd={your_password_here};3. Clique **"Add client IP"**
-
-Encrypt=yes;4. Ative **"Allow Azure services..."**
-
-```5. Clique **"Save"**
-
-
-
-**Como preencher o .env:**### Dependências Principais
-
-- `AZURE_SQL_SERVER`: nexum-server.database.windows.net (sem `tcp:` e sem `,1433`)
-
-- `AZURE_SQL_DATABASE`: stefanini_app```
-
-- `AZURE_SQL_USERNAME`: nexumadminFlask==3.1.2           # Framework web
-
-- `AZURE_SQL_PASSWORD`: Sua senha realflask-cors==6.0.1      # CORS support
-
-bcrypt==4.1.2          # Hash de senhas
-
-### 🔥 Configurar Firewall do Azurepyodbc==5.2.0          # Conexão SQL Server
-
-python-dotenv==1.0.1   # Variáveis de ambiente
-
-⚠️ **MUITO IMPORTANTE**: O Azure bloqueia todas as conexões por padrão!flasgger==0.9.7.1      # Documentação Swagger (futuro)
-
-```
-
-1. No Azure Portal, vá ao **SQL Server** (não o Database)
-
-2. Menu lateral → **"Networking"** ou **"Firewalls and virtual networks"**---
-
-3. Clique **"Add client IP"** (adiciona seu IP automaticamente)
-
-4. Ative **"Allow Azure services and resources to access this server"**## 🗄️ Banco de Dados
-
-5. Clique **"Save"**
-
-### Tabela: `supply_chain.usuarios`
-
-### 📦 Dependências Principais
-
-```sql
-
-```txtCREATE TABLE supply_chain.usuarios (
-
-Flask==3.1.2           # Framework web    id INT IDENTITY(1,1) PRIMARY KEY,
-
-flask-cors==6.0.1      # CORS support    email NVARCHAR(255) NOT NULL UNIQUE,
-
-bcrypt==4.1.2          # Hash de senhas    senha VARCHAR(255) NOT NULL,          -- Hash bcrypt
-
-pyodbc==5.2.0          # Conexão SQL Server    matricula NVARCHAR(50) NOT NULL UNIQUE,
-
-python-dotenv==1.0.1   # Variáveis de ambiente    nivel_acesso NVARCHAR(50) NOT NULL,   
-
-pytest==8.4.0          # Testes    data_criacao DATETIME2 NOT NULL DEFAULT GETDATE(),
-
-coverage==7.11.0       # Cobertura de testes    data_atualizacao DATETIME2 NOT NULL DEFAULT GETDATE(),
-
-```    
-
-    CONSTRAINT CK_usuarios_nivel_acesso 
-
----        CHECK (nivel_acesso IN ('planejador', 'comprador', 'fiscal', 'gestor')),
-
-    CONSTRAINT CK_usuarios_email_valido 
-
-## 🗄️ Banco de Dados        CHECK (email LIKE '%_@__%.__%')
-
-)
-
-### 📊 Tabela: `supply_chain.usuarios````
-
-
-
-```sql### Níveis de Acesso
-
-CREATE TABLE supply_chain.usuarios (
-
-    id INT IDENTITY(1,1) PRIMARY KEY,- **planejador**: Planejador de Supply Chain
-
-    email NVARCHAR(255) NOT NULL UNIQUE,- **comprador**: Responsável por compras
-
-    senha VARCHAR(255) NOT NULL,          -- Hash bcrypt- **fiscal**: Fiscal de contratos
-
-    matricula NVARCHAR(50) NOT NULL UNIQUE,- **gestor**: Gestor/Administrador
-
-    nivel_acesso NVARCHAR(50) NOT NULL,   
-
-    data_criacao DATETIME2 NOT NULL DEFAULT GETDATE(),### Índices
-
-    data_atualizacao DATETIME2 NOT NULL DEFAULT GETDATE(),
-
-    ```sql
-
-    CONSTRAINT CK_usuarios_nivel_acesso -- Performance em login
-
-        CHECK (nivel_acesso IN ('planejador', 'comprador', 'fiscal', 'gestor')),CREATE NONCLUSTERED INDEX IX_usuarios_email 
-
-    CONSTRAINT CK_usuarios_email_valido     ON supply_chain.usuarios(email)
-
-        CHECK (email LIKE '%_@__%.__%')
-
-)-- Performance em busca por matrícula  
-
-```CREATE NONCLUSTERED INDEX IX_usuarios_matricula 
-
-    ON supply_chain.usuarios(matricula)
-
-### 👥 Níveis de Acesso
-
--- Performance em filtro por nível
-
-| Nível | Descrição | Permissões |CREATE NONCLUSTERED INDEX IX_usuarios_nivel_acesso 
-
-|-------|-----------|------------|    ON supply_chain.usuarios(nivel_acesso)
-
-| **planejador** | Planejador de Supply Chain | Visualização e análise de dados |```
-
-| **comprador** | Responsável por compras | Gestão de pedidos e fornecedores |
-
-| **fiscal** | Fiscal de contratos | Auditoria e conformidade |---
-
-| **gestor** | Gestor/Administrador | Acesso total ao sistema |
-
-## 🔐 Sistema de Autenticação
-
-### 📈 Índices para Performance
-
----
-
-```sql
-
--- Performance em login## 📁 Estrutura do Projeto
-
-CREATE NONCLUSTERED INDEX IX_usuarios_email 
-
-    ON supply_chain.usuarios(email)```
-
-Nexum-BackEnd/
-
--- Performance em busca por matrícula  ├── app.py                      # Aplicação principal Flask
-
-CREATE NONCLUSTERED INDEX IX_usuarios_matricula ├── analise_dados.py            # Script de análise de dados
-
-    ON supply_chain.usuarios(matricula)├── requirements.txt            # Dependências Python
-
-├── .env.example                # Template de configuração
-
--- Performance em filtro por nível├── .gitignore                  # Arquivos ignorados pelo Git
-
-CREATE NONCLUSTERED INDEX IX_usuarios_nivel_acesso │
-
-    ON supply_chain.usuarios(nivel_acesso)├── database/                   # Scripts e docs do banco de dados
-
-```│   ├── create_table.sql        # Criação de tabelas, views, SPs
-
-│   ├── insert_data.py          # Script Python para inserção
-
----│   ├── generate_inserts.py     # Gerador de INSERTs SQL
-
-│   ├── insert_data.sql         # INSERTs gerados (não commitado)
-
-## 🔐 Sistema de Autenticação│   └── README.md               # Documentação do banco
-
-│
-
-### 🏗️ Arquitetura em Camadas├── dados_hackathon.csv         # Dados de entrada (5.000 produtos)
-
-├── SETUP_DATABASE.md           # Guia de setup do banco
-
-```└── README.md                   # Este arquivo
-
-┌─────────────────────────────────────────────────────────────┐```
-
-│                    CLIENT (Frontend/Postman)                │
-
-└──────────────────────┬──────────────────────────────────────┘---
-
-                       │ HTTP Request (JSON)
-
-                       ▼## 🗄️ Banco de Dados
-
-┌─────────────────────────────────────────────────────────────┐
-
-│              CONTROLLER (controllers/user_controller.py)     │### **Tabela Principal**
-
-│  • Recebe requisições HTTP                                   │`supply_chain.produtos_estoque` - Controle completo de estoque
-
-│  • Valida dados de entrada                                   │
-
-│  • Retorna respostas JSON                                    │### **Views Disponíveis**
-
-└──────────────────────┬──────────────────────────────────────┘1. `vw_produtos_criticos` - Produtos com risco de ruptura
-
-                       │ Chama Service2. `vw_dashboard_executivo` - KPIs gerenciais
-
-                       ▼3. `vw_analise_abc` - Análise por classificação
-
-┌─────────────────────────────────────────────────────────────┐
-
-│               SERVICE (services/user_service.py)             │### **Stored Procedures**
-
-│  • Validações de negócio                                     │1. `sp_calcular_necessidade_compra` - Cálculo inteligente de compras
-
-│  • Hash de senha (bcrypt)                                    │
-
-│  • Lógica de autenticação                                    │### **Queries Úteis**
-
-└──────────────────────┬──────────────────────────────────────┘
-
-                       │ Chama Repository```sql
-
-                       ▼-- Ver produtos críticos
-
-┌─────────────────────────────────────────────────────────────┐SELECT * FROM supply_chain.vw_produtos_criticos
-
-│          REPOSITORY (repositories/user_repository.py)        │WHERE nivel_criticidade = 'CRÍTICO';
-
-│  • Queries SQL                                               │
-
-│  • CRUD no banco de dados                                    │-- Calcular necessidade de compra (30 dias, fator 1.5)
-
-│  • Conversão User ↔ Database                                 │EXEC supply_chain.sp_calcular_necessidade_compra 
-
-└──────────────────────┬──────────────────────────────────────┘  @lead_time_dias = 30,
-
-                       │ PyODBC  @fator_seguranca = 1.5;
-
-                       ▼
-
-┌─────────────────────────────────────────────────────────────┐-- Dashboard executivo
-
-│              DATABASE (Azure SQL - supply_chain.usuarios)    │SELECT * FROM supply_chain.vw_dashboard_executivo;
-
-└─────────────────────────────────────────────────────────────┘```
-
-```
-
-📖 **Documentação completa:** [database/README.md](database/README.md)
-
-### 🔒 Segurança
-
----
-
-#### Hash de Senhas (bcrypt)
-
-## 🔧 Tecnologias
+- Especificação OpenAPI: http://localhost:5000/swagger.json
 
 ```python
 

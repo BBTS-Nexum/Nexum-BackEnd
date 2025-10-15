@@ -9,7 +9,7 @@
     }
   },
   "host": "localhost:5000",
-  "basePath": "/api",
+  "basePath": "/",
   "schemes": ["http"],
   "consumes": ["application/json"],
   "produces": ["application/json"],
@@ -30,11 +30,15 @@
     {
       "name": "Tipologia",
       "description": "Informações sobre tipos de materiais"
+    },
+    {
+      "name": "Indicadores",
+      "description": "Cálculos de ES, FA, QA, cobertura e planejamento de compras"
     }
   ],
   
   "paths": {
-    "/usuarios/login": {
+    "/api/usuarios/login": {
       "post": {
         "tags": ["Autenticação"],
         "summary": "Login de usuário",
@@ -73,7 +77,7 @@
       }
     },
     
-    "/usuarios/registrar": {
+    "/api/usuarios/registrar": {
       "post": {
         "tags": ["Autenticação"],
         "summary": "Registrar novo usuário",
@@ -103,7 +107,7 @@
       }
     },
     
-    "/usuarios/": {
+    "/api/usuarios/": {
       "get": {
         "tags": ["Usuários"],
         "summary": "Listar todos os usuários",
@@ -128,7 +132,7 @@
       }
     },
     
-    "/usuarios/niveis-acesso": {
+    "/api/usuarios/niveis-acesso": {
       "get": {
         "tags": ["Usuários"],
         "summary": "Listar níveis de acesso",
@@ -148,7 +152,7 @@
       }
     },
     
-    "/produtos/tipos": {
+    "/api/produtos/tipos": {
       "get": {
         "tags": ["Tipologia"],
         "summary": "Listar tipos de materiais",
@@ -169,7 +173,7 @@
       }
     },
     
-    "/produtos/": {
+    "/api/produtos/": {
       "get": {
         "tags": ["Produtos"],
         "summary": "Listar produtos com paginação",
@@ -232,7 +236,7 @@
       }
     },
     
-    "/produtos/{id}": {
+    "/api/produtos/{id}": {
       "get": {
         "tags": ["Produtos"],
         "summary": "Buscar produto por ID",
@@ -297,7 +301,7 @@
       }
     },
     
-    "/produtos/codigo/{codigo}": {
+    "/api/produtos/codigo/{codigo}": {
       "get": {
         "tags": ["Produtos"],
         "summary": "Buscar produto por código",
@@ -320,7 +324,7 @@
       }
     },
     
-    "/produtos/criticos": {
+    "/api/produtos/criticos": {
       "get": {
         "tags": ["Produtos"],
         "summary": "Produtos com estoque crítico",
@@ -337,7 +341,7 @@
       }
     },
     
-    "/produtos/estatisticas": {
+    "/api/produtos/estatisticas": {
       "get": {
         "tags": ["Produtos"],
         "summary": "Estatísticas gerais do estoque",
@@ -365,6 +369,108 @@
                     "testavel": {"type": "integer"},
                     "descartavel": {"type": "integer"}
                   }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    
+    "/api/produtos/{id}/indicadores": {
+      "get": {
+        "tags": ["Indicadores"],
+        "summary": "Indicadores calculados de um produto",
+        "description": "Retorna ES (Estoque Segurança), FA (Fator Ajuste), QA (Quantidade Adquirir), cobertura em meses e status do estoque",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Indicadores calculados",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {"type": "boolean"},
+                "produto": {"$ref": "#/definitions/ProdutoComIndicadores"}
+              }
+            }
+          },
+          "404": {"description": "Produto não encontrado"}
+        }
+      }
+    },
+    
+    "/api/produtos/necessidade-compra": {
+      "get": {
+        "tags": ["Indicadores"],
+        "summary": "Produtos que precisam ser comprados",
+        "description": "Lista produtos onde QA > 0 (necessidade de compra imediata). Ordenado por QA decrescente.",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "type": "integer",
+            "default": 100,
+            "description": "Número máximo de produtos (1-1000)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de produtos para compra",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {"type": "boolean"},
+                "total": {"type": "integer"},
+                "produtos": {
+                  "type": "array",
+                  "items": {"$ref": "#/definitions/ProdutoComIndicadores"}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    
+    "/api/produtos/cobertura-baixa": {
+      "get": {
+        "tags": ["Indicadores"],
+        "summary": "Produtos com cobertura baixa",
+        "description": "Lista produtos com cobertura menor que X meses. Útil para planejamento preventivo.",
+        "parameters": [
+          {
+            "name": "meses",
+            "in": "query",
+            "type": "number",
+            "default": 2,
+            "description": "Número de meses de cobertura mínima"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "type": "integer",
+            "default": 100,
+            "description": "Número máximo de produtos (1-1000)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista de produtos com cobertura baixa",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {"type": "boolean"},
+                "total": {"type": "integer"},
+                "produtos": {
+                  "type": "array",
+                  "items": {"$ref": "#/definitions/ProdutoComIndicadores"}
                 }
               }
             }
@@ -435,6 +541,65 @@
         "observacoes": {"type": "string"},
         "ativo": {"type": "boolean", "default": true}
       }
+    },
+    
+    "ProdutoComIndicadores": {
+      "allOf": [
+        {"$ref": "#/definitions/Produto"},
+        {
+          "type": "object",
+          "properties": {
+            "indicadores": {
+              "type": "object",
+              "description": "Indicadores calculados automaticamente",
+              "properties": {
+                "pecas_boas": {
+                  "type": "number",
+                  "description": "Total de peças boas (saldo_manut + provid_compras + recebimento_esperado + transito_manut + stage_manut + recepcao_manut + pendente_ri)",
+                  "example": 150
+                },
+                "pecas_teste": {
+                  "type": "number",
+                  "description": "Total de peças em teste (pecas_teste + pecas_teste_kit)",
+                  "example": 20
+                },
+                "pecas_reparo": {
+                  "type": "number",
+                  "description": "Total de peças para reparo (fornecedor_reparo + laboratorio + wr + wrcr + stage_wr)",
+                  "example": 30
+                },
+                "estoque_seguranca": {
+                  "type": "number",
+                  "description": "ES - Estoque de Segurança calculado por ABC e Tipo. A/T-10,19: 4*CMM | A/T-20: 1.5*CMM | B,C/T-10,19: 5*CMM | B,C/T-20: 2.5*CMM",
+                  "example": 42
+                },
+                "fator_ajuste": {
+                  "type": "number",
+                  "description": "FA - Fator de Ajuste. Para T-10/19: ES + 4*CMM*coef_perda | Para T-20: ES + 4*CMM",
+                  "example": 50.5
+                },
+                "quantidade_adquirir": {
+                  "type": "number",
+                  "description": "QA - Quantidade a Adquirir = max(0, FA - Saldo_Total). Indica necessidade de compra imediata",
+                  "example": 25
+                },
+                "cobertura_meses": {
+                  "type": "number",
+                  "description": "Cobertura em meses = Saldo_Total / CMM. Indica por quantos meses o estoque atual é suficiente",
+                  "example": 3.5
+                },
+                "status": {
+                  "type": "string",
+                  "enum": ["critico", "baixo", "ok"],
+                  "description": "Status do estoque: critico (QA>0), baixo (cobertura<2), ok (cobertura>=2)",
+                  "example": "ok"
+                }
+              }
+            }
+          }
+        }
+      ]
     }
   }
 }
+

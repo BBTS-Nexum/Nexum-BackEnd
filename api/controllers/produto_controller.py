@@ -2,7 +2,7 @@
 Controller de Produto - Rotas da API
 """
 from flask import Blueprint, request, jsonify
-import services.produto_service as ps
+import api.services.produto_service as ps
 
 produto_bp = Blueprint('produto', __name__, url_prefix='/api/produtos')
 
@@ -208,3 +208,66 @@ def stats():
         import traceback
         traceback.print_exc()
         return jsonify({'success': False, 'message': str(e)}), 500
+
+
+@produto_bp.route('/<int:id>/indicadores', methods=['GET'])
+def indicadores(id):
+    """
+    GET /api/produtos/{id}/indicadores
+    Retorna todos os indicadores calculados para um produto específico
+    """
+    try:
+        result = ps.obter_indicadores_produto(id)
+        status = 200 if result['success'] else 404
+        return jsonify(result), status
+    except Exception as e:
+        print(f"❌ indicadores: {e}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({'success': False, 'message': str(e)}), 500
+
+
+@produto_bp.route('/necessidade-compra', methods=['GET'])
+def necessidade_compra():
+    """
+    GET /api/produtos/necessidade-compra
+    Lista produtos que precisam ser comprados (QA > 0)
+    """
+    try:
+        limit = request.args.get('limit', 100, type=int)
+        if not (1 <= limit <= 1000):
+            return jsonify({'success': False, 'message': 'limit entre 1 e 1000'}), 400
+        
+        result = ps.obter_produtos_necessidade_compra(limit)
+        return jsonify(result), 200
+    except Exception as e:
+        print(f"❌ necessidade_compra: {e}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({'success': False, 'message': str(e)}), 500
+
+
+@produto_bp.route('/cobertura-baixa', methods=['GET'])
+def cobertura_baixa():
+    """
+    GET /api/produtos/cobertura-baixa
+    Lista produtos com cobertura menor que X meses
+    """
+    try:
+        meses = request.args.get('meses', 2, type=float)
+        limit = request.args.get('limit', 100, type=int)
+        
+        if not (1 <= limit <= 1000):
+            return jsonify({'success': False, 'message': 'limit entre 1 e 1000'}), 400
+        
+        if meses < 0:
+            return jsonify({'success': False, 'message': 'meses deve ser >= 0'}), 400
+        
+        result = ps.obter_produtos_cobertura_baixa(meses, limit)
+        return jsonify(result), 200
+    except Exception as e:
+        print(f"❌ cobertura_baixa: {e}")
+        import traceback
+        traceback.print_exc()
+        return jsonify({'success': False, 'message': str(e)}), 500
+

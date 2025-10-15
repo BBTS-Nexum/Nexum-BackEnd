@@ -3,7 +3,7 @@ Repository de Usuário
 Responsável por acessar o banco de dados (camada de dados)
 """
 
-from models.user import User
+from api.models.user import User
 import aux_files.sql as db
 
 

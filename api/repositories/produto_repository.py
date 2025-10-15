@@ -3,7 +3,7 @@ Repository de Produto
 Responsável por acessar o banco de dados (camada de dados)
 """
 
-from models.produto import Produto
+from api.models.produto import Produto
 import aux_files.sql as db
 
 

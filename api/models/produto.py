@@ -55,32 +55,157 @@ class Produto:
         self.usuario_atualizacao = usuario_atualizacao
         self.ativo = ativo
     
+    def calcular_pecas_boas(self):
+        """
+        Calcula total de peças boas (disponíveis para uso)
+        Conforme FAQ 1: saldo_manut + provid_compras + recebimento_esperado + 
+        transito_manut + stage_manut + recepcao_manut + pendente_ri
+        """
+        return (
+            (self.saldo_manut or 0) +
+            (self.provid_compras or 0) +
+            (self.recebimento_esperado or 0) +
+            (self.transito_manut or 0) +
+            (self.stage_manut or 0) +
+            (self.recepcao_manut or 0) +
+            (self.pendente_ri or 0)
+        )
+    
+    def calcular_pecas_teste(self):
+        """
+        Calcula total de peças em teste (FAQ 2)
+        pecas_teste + pecas_teste_kit (atendimentos distantes)
+        """
+        return (self.pecas_teste or 0) + (self.pecas_teste_kit or 0)
+    
+    def calcular_pecas_reparo(self):
+        """
+        Calcula total de peças para reparo (FAQ 3)
+        fornecedor_reparo + laboratorio + wr + wrcr + stage_wr
+        """
+        return (
+            (self.fornecedor_reparo or 0) +
+            (self.laboratorio or 0) +
+            (self.wr or 0) +
+            (self.wrcr or 0) +
+            (self.stage_wr or 0)
+        )
+    
     def calcular_saldo_total(self):
         """
-        Calcula o saldo total baseado no tipo do material
+        Calcula o saldo total baseado no tipo do material (FAQ 6)
         
-        - Tipo 10 (reparavel): saldo + peças em teste + peças para reparo - perdas
-        - Tipo 19 (testavel): saldo + peças em teste + peças para reparo - perdas  
-        - Tipo 20 (descartavel): apenas saldo (peças boas)
+        - Tipo 10 (T-10 reparavel): peças boas + peças em teste + peças para reparo - perdas
+        - Tipo 19 (T-19 testavel): peças boas + peças em teste + peças para reparo - perdas
+        - Tipo 20 (T-20 descartavel): apenas peças boas
         """
-        if self.tipo == 20:  # descartavel
-            return self.saldo_manut or 0
+        pecas_boas = self.calcular_pecas_boas()
         
-        # reparavel (10) ou testavel (19)
-        pecas_boas = self.saldo_manut or 0
-        pecas_teste = (self.pecas_teste_kit or 0) + (self.pecas_teste or 0)
-        pecas_reparo = (self.fornecedor_reparo or 0) + (self.laboratorio or 0) + (self.wr or 0)
+        if self.tipo == 20:  # T-20 descartavel
+            return pecas_boas
+        
+        # T-10 ou T-19 (reparavel ou testavel)
+        pecas_teste = self.calcular_pecas_teste()
+        pecas_reparo = self.calcular_pecas_reparo()
         
         # Aplicar coeficiente de perda
         coef = self.coef_perda or 0
-        perda_estimada = pecas_reparo * coef if coef > 0 else 0
+        perdas = pecas_reparo * coef
         
-        saldo_total = pecas_boas + pecas_teste + pecas_reparo - perda_estimada
+        saldo_total = pecas_boas + pecas_teste + pecas_reparo - perdas
         return max(0, saldo_total)  # Não pode ser negativo
     
-    def to_dict(self):
-        """Converte o produto para dicionário"""
-        return {
+    def calcular_estoque_seguranca(self):
+        """
+        Calcula Estoque de Segurança (ES) baseado em ABC e Tipo (FAQ 8)
+        
+        - Itens "A" + T-10/T-19: ES = 4 * CMM
+        - Itens "A" + T-20: ES = 1.5 * CMM
+        - Itens "B"/"C" + T-10/T-19: ES = 5 * CMM
+        - Itens "B"/"C" + T-20: ES = 2.5 * CMM
+        """
+        cmm = self.cmm or 0
+        
+        if self.abc == 'A':
+            if self.tipo in [10, 19]:  # T-10 ou T-19
+                return 4 * cmm
+            else:  # T-20
+                return 1.5 * cmm
+        else:  # B ou C
+            if self.tipo in [10, 19]:
+                return 5 * cmm
+            else:  # T-20
+                return 2.5 * cmm
+    
+    def calcular_fator_ajuste(self):
+        """
+        Calcula Fator de Ajuste (FA) considerando leadtime e perdas (FAQ 9)
+        
+        - Para T-10/T-19: FA = ES + (4 * CMM * coef_perda)
+        - Para T-20: FA = ES + (4 * CMM)
+        
+        O 4 * CMM representa a cobertura de leadtime (aproximadamente 4 meses)
+        """
+        es = self.calcular_estoque_seguranca()
+        cmm = self.cmm or 0
+        coef = self.coef_perda or 0
+        
+        if self.tipo in [10, 19]:  # T-10 ou T-19
+            return es + (4 * cmm * coef)
+        else:  # T-20
+            return es + (4 * cmm)
+    
+    def calcular_quantidade_adquirir(self):
+        """
+        Calcula Quantidade a Adquirir (QA) - necessidade de compra (FAQ 10)
+        
+        QA = max(0, FA - Saldo_Total)
+        
+        Representa a quantidade que deve ser comprada imediatamente
+        para cobrir os próximos 30 dias
+        """
+        fa = self.calcular_fator_ajuste()
+        saldo_total = self.calcular_saldo_total()
+        
+        return max(0, fa - saldo_total)
+    
+    def calcular_cobertura_meses(self):
+        """
+        Calcula a cobertura em meses que o estoque atual proporciona
+        
+        Cobertura = Saldo_Total / CMM
+        """
+        cmm = self.cmm or 0
+        if cmm > 0:
+            return self.calcular_saldo_total() / cmm
+        return 0
+    
+    def obter_status_estoque(self):
+        """
+        Retorna o status do estoque baseado em QA e cobertura
+        
+        - critico: QA > 0 (precisa comprar)
+        - baixo: cobertura < 2 meses
+        - ok: cobertura >= 2 meses
+        """
+        qa = self.calcular_quantidade_adquirir()
+        cobertura = self.calcular_cobertura_meses()
+        
+        if qa > 0:
+            return 'critico'
+        elif cobertura < 2:
+            return 'baixo'
+        else:
+            return 'ok'
+    
+    def to_dict(self, incluir_indicadores=False):
+        """
+        Converte o produto para dicionário
+        
+        Args:
+            incluir_indicadores (bool): Se True, inclui ES, FA, QA, cobertura e status
+        """
+        data = {
             'id': self.id,
             'codigo': self.codigo,
             'abc': self.abc,
@@ -109,6 +234,20 @@ class Produto:
             'usuario_atualizacao': self.usuario_atualizacao,
             'ativo': self.ativo
         }
+        
+        if incluir_indicadores:
+            data['indicadores'] = {
+                'pecas_boas': self.calcular_pecas_boas(),
+                'pecas_teste': self.calcular_pecas_teste(),
+                'pecas_reparo': self.calcular_pecas_reparo(),
+                'estoque_seguranca': self.calcular_estoque_seguranca(),
+                'fator_ajuste': self.calcular_fator_ajuste(),
+                'quantidade_adquirir': self.calcular_quantidade_adquirir(),
+                'cobertura_meses': round(self.calcular_cobertura_meses(), 2),
+                'status': self.obter_status_estoque()
+            }
+        
+        return data
     
     @staticmethod
     def from_db_row(row):

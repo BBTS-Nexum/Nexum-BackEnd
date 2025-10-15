@@ -3,7 +3,7 @@ Service de Produto
 Responsável pela lógica de negócio (validações, transformações, etc.)
 """
 
-from repositories import produto_repository
+from api.repositories import produto_repository
 
 
 def criar_produto(codigo, abc, tipo, **kwargs):
@@ -369,3 +369,93 @@ def obter_estatisticas():
         dict: Estatísticas
     """
     return produto_repository.get_estatisticas()
+
+
+def obter_indicadores_produto(produto_id):
+    """
+    Retorna todos os indicadores calculados para um produto
+    
+    Args:
+        produto_id (int): ID do produto
+    
+    Returns:
+        dict: {'success': bool, 'produto': dict com indicadores}
+    """
+    produto = produto_repository.find_by_id(produto_id)
+    
+    if not produto:
+        return {
+            'success': False,
+            'message': 'Produto não encontrado'
+        }
+    
+    return {
+        'success': True,
+        'produto': produto.to_dict(incluir_indicadores=True)
+    }
+
+
+def obter_produtos_necessidade_compra(limit=100):
+    """
+    Lista produtos que precisam ser comprados (QA > 0)
+    
+    Args:
+        limit (int): Número máximo de produtos
+    
+    Returns:
+        dict: {'success': bool, 'total': int, 'produtos': list}
+    """
+    produtos = produto_repository.list_all(page=1, per_page=5000)['produtos']
+    
+    produtos_compra = []
+    for p in produtos:
+        qa = p.calcular_quantidade_adquirir()
+        if qa > 0:
+            produto_dict = p.to_dict(incluir_indicadores=True)
+            produtos_compra.append(produto_dict)
+    
+    # Ordenar por QA decrescente (maior necessidade primeiro)
+    produtos_compra.sort(key=lambda x: x['indicadores']['quantidade_adquirir'], reverse=True)
+    
+    # Limitar resultado
+    produtos_compra = produtos_compra[:limit]
+    
+    return {
+        'success': True,
+        'total': len(produtos_compra),
+        'produtos': produtos_compra
+    }
+
+
+def obter_produtos_cobertura_baixa(meses=2, limit=100):
+    """
+    Lista produtos com cobertura menor que X meses
+    
+    Args:
+        meses (float): Número de meses de cobertura mínima
+        limit (int): Número máximo de produtos
+    
+    Returns:
+        dict: {'success': bool, 'total': int, 'produtos': list}
+    """
+    produtos = produto_repository.list_all(page=1, per_page=5000)['produtos']
+    
+    produtos_baixa = []
+    for p in produtos:
+        cobertura = p.calcular_cobertura_meses()
+        if cobertura < meses and p.cmm > 0:  # Apenas se tiver CMM > 0
+            produto_dict = p.to_dict(incluir_indicadores=True)
+            produtos_baixa.append(produto_dict)
+    
+    # Ordenar por cobertura crescente (menor cobertura primeiro)
+    produtos_baixa.sort(key=lambda x: x['indicadores']['cobertura_meses'])
+    
+    # Limitar resultado
+    produtos_baixa = produtos_baixa[:limit]
+    
+    return {
+        'success': True,
+        'total': len(produtos_baixa),
+        'produtos': produtos_baixa
+    }
+

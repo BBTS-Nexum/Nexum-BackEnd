@@ -5,7 +5,7 @@ Responsável pela lógica de negócio (validações, bcrypt, etc.)
 
 import bcrypt
 import re
-from repositories import user_repository
+from api.repositories import user_repository
 
 
 def login(email, senha):

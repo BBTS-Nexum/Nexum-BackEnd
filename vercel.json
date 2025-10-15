@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/index.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "api/index.py"
+    }
+  ],
+  "env": {
+    "DB_SERVER": "@db-server",
+    "DB_DATABASE": "@db-database",
+    "DB_USERNAME": "@db-username",
+    "DB_PASSWORD": "@db-password",
+    "DB_DRIVER": "ODBC Driver 18 for SQL Server"
+  }
+}

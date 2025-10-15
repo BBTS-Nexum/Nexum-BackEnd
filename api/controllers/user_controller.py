@@ -4,9 +4,9 @@ Responsável pelas rotas da API (endpoints)
 """
 
 from flask import Blueprint, request, jsonify
-from services import user_service
+from api.services import user_service
 
-user_bp = Blueprint('user', __name__, url_prefix='/api/users')
+user_bp = Blueprint('user', __name__, url_prefix='/api/usuarios')
 
 
 @user_bp.route('/login', methods=['POST'])
