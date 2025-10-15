@@ -18,24 +18,28 @@ load_dotenv()
 # CONFIGURAÇÃO DE CONEXÃO
 # ============================================================================
 AZURE_SQL_CONFIG = {
+    'driver': os.getenv('AZURE_SQL_DRIVER', 'ODBC Driver 18 for SQL Server'),
     'server': os.getenv('AZURE_SQL_SERVER', 'seu-servidor.database.windows.net'),
+    'port': os.getenv('AZURE_SQL_PORT', '1433'),
     'database': os.getenv('AZURE_SQL_DATABASE', 'nexum-supply-chain'),
     'username': os.getenv('AZURE_SQL_USERNAME', 'seu-usuario'),
     'password': os.getenv('AZURE_SQL_PASSWORD', 'sua-senha'),
-    'driver': '{ODBC Driver 18 for SQL Server}'
+    'encrypt': os.getenv('AZURE_SQL_ENCRYPT', 'yes'),
+    'trust_server_certificate': os.getenv('AZURE_SQL_TRUST_SERVER_CERTIFICATE', 'no'),
+    'connection_timeout': os.getenv('AZURE_SQL_CONNECTION_TIMEOUT', '30')
 }
 
 def get_connection():
     """Estabelece conexão com o banco de dados"""
     conn_str = (
-        f"DRIVER={AZURE_SQL_CONFIG['driver']};"
-        f"SERVER={AZURE_SQL_CONFIG['server']};"
+        f"DRIVER={{{AZURE_SQL_CONFIG['driver']}}};"
+        f"SERVER={AZURE_SQL_CONFIG['server']},{AZURE_SQL_CONFIG['port']};"
         f"DATABASE={AZURE_SQL_CONFIG['database']};"
         f"UID={AZURE_SQL_CONFIG['username']};"
         f"PWD={AZURE_SQL_CONFIG['password']};"
-        f"Encrypt=yes;"
-        f"TrustServerCertificate=no;"
-        f"Connection Timeout=30;"
+        f"Encrypt={AZURE_SQL_CONFIG['encrypt']};"
+        f"TrustServerCertificate={AZURE_SQL_CONFIG['trust_server_certificate']};"
+        f"Connection Timeout={AZURE_SQL_CONFIG['connection_timeout']};"
     )
     return pyodbc.connect(conn_str)
 

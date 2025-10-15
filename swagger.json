@@ -1,0 +1,440 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Nexum Supply Chain API",
+    "description": "API REST para gestão de estoque com classificação ABC e tipologia de materiais (reparável, testável, descartável). Sistema desenvolvido para o hackathon Stefanini.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Nexum Team"
+    }
+  },
+  "host": "localhost:5000",
+  "basePath": "/api",
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  
+  "tags": [
+    {
+      "name": "Autenticação",
+      "description": "Endpoints de login e registro de usuários"
+    },
+    {
+      "name": "Usuários",
+      "description": "Gerenciamento de usuários do sistema"
+    },
+    {
+      "name": "Produtos",
+      "description": "CRUD e consultas de produtos/materiais do estoque"
+    },
+    {
+      "name": "Tipologia",
+      "description": "Informações sobre tipos de materiais"
+    }
+  ],
+  
+  "paths": {
+    "/usuarios/login": {
+      "post": {
+        "tags": ["Autenticação"],
+        "summary": "Login de usuário",
+        "description": "Autentica usuário com email e senha. Retorna dados do usuário incluindo nível de acesso.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {"type": "string", "example": "admin@nexum.com"},
+                "senha": {"type": "string", "example": "senha123"}
+              },
+              "required": ["email", "senha"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login bem-sucedido",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {"type": "integer"},
+                "nome": {"type": "string"},
+                "email": {"type": "string"},
+                "nivel_acesso": {"type": "integer"}
+              }
+            }
+          },
+          "401": {"description": "Credenciais inválidas"},
+          "500": {"description": "Erro interno"}
+        }
+      }
+    },
+    
+    "/usuarios/registrar": {
+      "post": {
+        "tags": ["Autenticação"],
+        "summary": "Registrar novo usuário",
+        "description": "Cria novo usuário no sistema. Senha é hashada com bcrypt.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nome": {"type": "string", "example": "João Silva"},
+                "email": {"type": "string", "example": "joao@nexum.com"},
+                "senha": {"type": "string", "example": "senha123"},
+                "nivel_acesso": {"type": "integer", "example": 1, "description": "1=Admin, 2=Usuário"}
+              },
+              "required": ["nome", "email", "senha"]
+            }
+          }
+        ],
+        "responses": {
+          "201": {"description": "Usuário criado com sucesso"},
+          "400": {"description": "Dados inválidos ou email já existe"},
+          "500": {"description": "Erro interno"}
+        }
+      }
+    },
+    
+    "/usuarios/": {
+      "get": {
+        "tags": ["Usuários"],
+        "summary": "Listar todos os usuários",
+        "description": "Retorna lista de todos os usuários cadastrados (sem senha)",
+        "responses": {
+          "200": {
+            "description": "Lista de usuários",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {"type": "integer"},
+                  "nome": {"type": "string"},
+                  "email": {"type": "string"},
+                  "nivel_acesso": {"type": "integer"}
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    
+    "/usuarios/niveis-acesso": {
+      "get": {
+        "tags": ["Usuários"],
+        "summary": "Listar níveis de acesso",
+        "description": "Retorna mapeamento de níveis de acesso disponíveis",
+        "responses": {
+          "200": {
+            "description": "Níveis de acesso",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "1": {"type": "string", "example": "admin"},
+                "2": {"type": "string", "example": "usuario"}
+              }
+            }
+          }
+        }
+      }
+    },
+    
+    "/produtos/tipos": {
+      "get": {
+        "tags": ["Tipologia"],
+        "summary": "Listar tipos de materiais",
+        "description": "Retorna mapeamento de tipos de materiais. T-10=reparável (pode ser reparado), T-19=testável (requer teste), T-20=descartável (uso único).",
+        "responses": {
+          "200": {
+            "description": "Tipos de materiais disponíveis",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "10": {"type": "string", "example": "reparavel"},
+                "19": {"type": "string", "example": "testavel"},
+                "20": {"type": "string", "example": "descartavel"}
+              }
+            }
+          }
+        }
+      }
+    },
+    
+    "/produtos/": {
+      "get": {
+        "tags": ["Produtos"],
+        "summary": "Listar produtos com paginação",
+        "description": "Retorna lista paginada de produtos. Cada produto inclui tipo_nome (reparavel/testavel/descartavel) e saldo_total calculado.",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "type": "integer",
+            "default": 1,
+            "description": "Número da página"
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "type": "integer",
+            "default": 50,
+            "description": "Itens por página"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lista paginada de produtos",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "produtos": {
+                  "type": "array",
+                  "items": {"$ref": "#/definitions/Produto"}
+                },
+                "total": {"type": "integer"},
+                "page": {"type": "integer"},
+                "per_page": {"type": "integer"},
+                "total_pages": {"type": "integer"}
+              }
+            }
+          }
+        }
+      },
+      
+      "post": {
+        "tags": ["Produtos"],
+        "summary": "Criar novo produto",
+        "description": "Cria novo produto no estoque. ABC deve ser A, B ou C. Tipo deve ser 10, 19 ou 20.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {"$ref": "#/definitions/ProdutoInput"}
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Produto criado",
+            "schema": {"$ref": "#/definitions/Produto"}
+          },
+          "400": {"description": "Dados inválidos"}
+        }
+      }
+    },
+    
+    "/produtos/{id}": {
+      "get": {
+        "tags": ["Produtos"],
+        "summary": "Buscar produto por ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Produto encontrado",
+            "schema": {"$ref": "#/definitions/Produto"}
+          },
+          "404": {"description": "Produto não encontrado"}
+        }
+      },
+      
+      "put": {
+        "tags": ["Produtos"],
+        "summary": "Atualizar produto",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {"$ref": "#/definitions/ProdutoInput"}
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Produto atualizado",
+            "schema": {"$ref": "#/definitions/Produto"}
+          },
+          "404": {"description": "Produto não encontrado"}
+        }
+      },
+      
+      "delete": {
+        "tags": ["Produtos"],
+        "summary": "Deletar produto",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {"description": "Produto deletado com sucesso"},
+          "404": {"description": "Produto não encontrado"}
+        }
+      }
+    },
+    
+    "/produtos/codigo/{codigo}": {
+      "get": {
+        "tags": ["Produtos"],
+        "summary": "Buscar produto por código",
+        "description": "Busca produto pelo código único do material",
+        "parameters": [
+          {
+            "name": "codigo",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Produto encontrado",
+            "schema": {"$ref": "#/definitions/Produto"}
+          },
+          "404": {"description": "Produto não encontrado"}
+        }
+      }
+    },
+    
+    "/produtos/criticos": {
+      "get": {
+        "tags": ["Produtos"],
+        "summary": "Produtos com estoque crítico",
+        "description": "Retorna produtos onde saldo_total <= estoque_minimo (alerta de reposição)",
+        "responses": {
+          "200": {
+            "description": "Lista de produtos críticos",
+            "schema": {
+              "type": "array",
+              "items": {"$ref": "#/definitions/Produto"}
+            }
+          }
+        }
+      }
+    },
+    
+    "/produtos/estatisticas": {
+      "get": {
+        "tags": ["Produtos"],
+        "summary": "Estatísticas gerais do estoque",
+        "description": "Retorna total de produtos, produtos críticos e contadores por ABC e tipo",
+        "responses": {
+          "200": {
+            "description": "Estatísticas do estoque",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "total_produtos": {"type": "integer"},
+                "produtos_criticos": {"type": "integer"},
+                "por_abc": {
+                  "type": "object",
+                  "properties": {
+                    "A": {"type": "integer"},
+                    "B": {"type": "integer"},
+                    "C": {"type": "integer"}
+                  }
+                },
+                "por_tipo": {
+                  "type": "object",
+                  "properties": {
+                    "reparavel": {"type": "integer"},
+                    "testavel": {"type": "integer"},
+                    "descartavel": {"type": "integer"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  
+  "definitions": {
+    "Produto": {
+      "type": "object",
+      "properties": {
+        "id": {"type": "integer", "example": 1},
+        "codigo": {"type": "string", "example": "MAT-001"},
+        "abc": {"type": "string", "example": "A", "enum": ["A", "B", "C"]},
+        "tipo": {"type": "integer", "example": 10, "enum": [10, 19, 20]},
+        "tipo_nome": {"type": "string", "example": "reparavel"},
+        "saldo": {"type": "number", "example": 100},
+        "saldo_manut": {"type": "number", "example": 20},
+        "teste": {"type": "number", "example": 5},
+        "reparo": {"type": "number", "example": 3},
+        "perdas": {"type": "number", "example": 2},
+        "saldo_total": {"type": "number", "example": 126, "description": "Calculado: saldo + teste + reparo - perdas (tipos 10/19) ou apenas saldo (tipo 20)"},
+        "cmm": {"type": "number", "example": 10.5},
+        "estoque_minimo": {"type": "number", "example": 50},
+        "estoque_maximo": {"type": "number", "example": 200},
+        "leadtime": {"type": "integer", "example": 15},
+        "intervalo_reabast": {"type": "integer", "example": 30},
+        "custo_medio": {"type": "number", "example": 150.75},
+        "custo_total": {"type": "number", "example": 18975.50},
+        "lote_economico": {"type": "number", "example": 50},
+        "valor_medio_mes": {"type": "number", "example": 1500.00},
+        "ultimo_valor": {"type": "number", "example": 155.00},
+        "data_ultimo_valor": {"type": "string", "format": "date", "example": "2025-01-15"},
+        "localizacao": {"type": "string", "example": "A-12-03"},
+        "criticidade": {"type": "string", "example": "Alta"},
+        "observacoes": {"type": "string", "example": "Material importado"},
+        "ativo": {"type": "boolean", "example": true}
+      }
+    },
+    
+    "ProdutoInput": {
+      "type": "object",
+      "required": ["codigo", "abc", "tipo"],
+      "properties": {
+        "codigo": {"type": "string"},
+        "abc": {"type": "string", "enum": ["A", "B", "C"]},
+        "tipo": {"type": "integer", "enum": [10, 19, 20]},
+        "saldo": {"type": "number", "default": 0},
+        "saldo_manut": {"type": "number", "default": 0},
+        "teste": {"type": "number", "default": 0},
+        "reparo": {"type": "number", "default": 0},
+        "perdas": {"type": "number", "default": 0},
+        "cmm": {"type": "number", "default": 0},
+        "estoque_minimo": {"type": "number", "default": 0},
+        "estoque_maximo": {"type": "number", "default": 0},
+        "leadtime": {"type": "integer", "default": 0},
+        "intervalo_reabast": {"type": "integer", "default": 0},
+        "custo_medio": {"type": "number", "default": 0},
+        "custo_total": {"type": "number", "default": 0},
+        "lote_economico": {"type": "number", "default": 0},
+        "valor_medio_mes": {"type": "number", "default": 0},
+        "ultimo_valor": {"type": "number", "default": 0},
+        "data_ultimo_valor": {"type": "string", "format": "date"},
+        "localizacao": {"type": "string"},
+        "criticidade": {"type": "string"},
+        "observacoes": {"type": "string"},
+        "ativo": {"type": "boolean", "default": true}
+      }
+    }
+  }
+}
