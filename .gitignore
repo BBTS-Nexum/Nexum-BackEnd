@@ -87,3 +87,4 @@ azuredeploy.parameters.json
 .pytest_cache/
 .coverage
 htmlcov/
+.vercel
