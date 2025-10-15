@@ -4,7 +4,7 @@ Responsável por acessar o banco de dados (camada de dados)
 """
 
 from api.models.user import User
-import aux_files.sql as db
+import api.aux_files.sql as db
 
 
 def find_by_email(email):
