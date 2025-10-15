@@ -6,7 +6,7 @@ Responsável pelas rotas da API (endpoints)
 from flask import Blueprint, request, jsonify
 from api.services import user_service
 
-user_bp = Blueprint('user', __name__, url_prefix='/api/usuarios')
+user_bp = Blueprint('user', __name__)
 
 
 @user_bp.route('/login', methods=['POST'])

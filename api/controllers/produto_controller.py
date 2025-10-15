@@ -2,9 +2,9 @@
 Controller de Produto - Rotas da API
 """
 from flask import Blueprint, request, jsonify
-import services.produto_service as ps
+import api.services.produto_service as ps
 
-produto_bp = Blueprint('produto', __name__, url_prefix='/api/produtos')
+produto_bp = Blueprint('produto', __name__)
 
 
 @produto_bp.route('/tipos', methods=['GET'])

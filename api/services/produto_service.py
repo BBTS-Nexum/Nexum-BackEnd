@@ -3,7 +3,7 @@ Service de Produto
 Responsável pela lógica de negócio (validações, transformações, etc.)
 """
 
-from repositories import produto_repository
+from api.repositories import produto_repository
 
 
 def criar_produto(codigo, abc, tipo, **kwargs):
