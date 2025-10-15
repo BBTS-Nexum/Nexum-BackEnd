@@ -3,18 +3,25 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Tentar importar pymssql primeiro (para Vercel), depois pyodbc (para local)
+# Usar mssql (mssql-python) que já está instalado e funciona em serverless
 try:
-    import pymssql
-    USE_PYMSSQL = True
-    print("ℹ️  Usando pymssql (ambiente serverless)")
+    import mssql
+    USE_MSSQL = True
+    print("ℹ️  Usando mssql-python")
 except ImportError:
+    # Fallback para pymssql
     try:
-        import pyodbc
-        USE_PYMSSQL = False
-        print("ℹ️  Usando pyodbc (ambiente local)")
+        import pymssql as mssql
+        USE_MSSQL = True
+        print("ℹ️  Usando pymssql")
     except ImportError:
-        raise ImportError("Nenhum driver SQL disponível. Instale pymssql ou pyodbc.")
+        # Último fallback para pyodbc (apenas local)
+        try:
+            import pyodbc
+            USE_MSSQL = False
+            print("ℹ️  Usando pyodbc (ambiente local)")
+        except ImportError:
+            raise ImportError("Nenhum driver SQL disponível. Instale mssql-python, pymssql ou pyodbc.")
 
 # Connection string para pyodbc
 conn_str_pyodbc = (
@@ -30,10 +37,10 @@ conn_str_pyodbc = (
 
 
 def connect():
-    """Conecta ao banco usando pymssql (Vercel) ou pyodbc (local)"""
-    if USE_PYMSSQL:
-        # pymssql connection
-        conn = pymssql.connect(
+    """Conecta ao banco usando mssql/pymssql (Vercel) ou pyodbc (local)"""
+    if USE_MSSQL:
+        # mssql/pymssql connection
+        conn = mssql.connect(
             server=os.getenv('AZURE_SQL_SERVER'),
             port=int(os.getenv('AZURE_SQL_PORT', '1433')),
             user=os.getenv('AZURE_SQL_USERNAME'),
