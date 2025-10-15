@@ -1,53 +1,13 @@
-﻿"""from flask import Flask, jsonify, send_from_directory
+﻿"""
+Entry point para Vercel
+Importa a aplicação Flask de api/index.py
+"""
+from api.index import app
 
-Entry point para Vercelfrom flask_cors import CORS
-
-Importa a aplicação Flask de api/index.pyfrom flask_swagger_ui import get_swaggerui_blueprint
-
-"""from controllers.user_controller import user_bp
-
-from api.index import appfrom controllers.produto_controller import produto_bp
-
-
-
-# Vercel procura por uma variável 'app' neste arquivoapp = Flask(__name__)
-
-if __name__ == "__main__":CORS(app)
-
+# Vercel procura por uma variável 'app' neste arquivo
+if __name__ == "__main__":
     app.run()
 
-# Configuração do Swagger UI
-SWAGGER_URL = '/docs'
-API_URL = '/swagger.json'
-
-swaggerui_blueprint = get_swaggerui_blueprint(
-    SWAGGER_URL,
-    API_URL,
-    config={
-        'app_name': "Nexum Supply Chain API"
-    }
-)
-
-app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
-app.register_blueprint(user_bp)
-app.register_blueprint(produto_bp)
-
-@app.route('/swagger.json')
-def swagger_spec():
-    """Serve a especificação OpenAPI"""
-    return send_from_directory('.', 'swagger.json')
-
-@app.route('/')
-def home():
-    return jsonify({
-        'message': 'Nexum Supply Chain API',
-        'version': '1.0.0',
-        'docs': '/docs',
-        'spec': '/swagger.json'
-    })
-
-if __name__ == '__main__':
-    print('\n' + '='*80)
     print('NEXUM SUPPLY CHAIN API'.center(80))
     print('='*80)
     print('\nServidor: http://localhost:5000')
