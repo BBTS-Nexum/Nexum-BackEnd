@@ -1,0 +1,198 @@
+"TimeUTC","timestampInMs","requestPath","requestMethod","requestQueryString","responseStatusCode","requestId","requestUserAgent","level","environment","branch","vercelCache","type","function","host","deploymentDomain","deploymentId","durationMs","region","maxMemoryUsed","memorySize","message","projectId","traceId","sessionId","invocationId","instanceId","concurrency"
+"2025-10-15 23:35:37",1760571337080,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/favicon.ico","GET","",-1,"whmsk-1760571336183-7664f305dadb","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",-1,"iad1",-1,-1,"Traceback (most recent call last):
+File ""/var/task/vc__handler__python.py"", line 242, in <module>
+if not issubclass(base, BaseHTTPRequestHandler):
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: issubclass() arg 1 must be a class
+ℹ️  Usando pymssql (ambiente serverless)
+Python process exited with exit status: 1. The logs above can help with debugging the issue.","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N3N9JC0SQMP36B85T6DQ9M","",-1
+"2025-10-15 23:35:36",1760571336267,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/favicon.ico","GET","",500,"whmsk-1760571336183-7664f305dadb","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",796,"iad1",75,2048,"","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N3N9JC0SQMP36B85T6DQ9M","",1
+"2025-10-15 23:35:35",1760571335988,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/docs","GET","",-1,"9xtxv-1760571335110-0230c0975236","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",-1,"iad1",-1,-1,"ℹ️  Usando pymssql (ambiente serverless)
+Traceback (most recent call last):
+File ""/var/task/vc__handler__python.py"", line 242, in <module>
+if not issubclass(base, BaseHTTPRequestHandler):
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: issubclass() arg 1 must be a class
+Python process exited with exit status: 1. The logs above can help with debugging the issue.","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N3N8G9HTEEPXJ7W1H929E0","",-1
+"2025-10-15 23:35:35",1760571335177,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/docs","GET","",500,"9xtxv-1760571335110-0230c0975236","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",781,"iad1",75,2048,"","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N3N8G9HTEEPXJ7W1H929E0","",1
+"2025-10-15 23:35:20",1760571320423,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/favicon.ico","GET","",-1,"sgdsn-1760571319539-c9e860b69b0a","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",-1,"iad1",-1,-1,"ℹ️  Usando pymssql (ambiente serverless)
+Traceback (most recent call last):
+File ""/var/task/vc__handler__python.py"", line 242, in <module>
+if not issubclass(base, BaseHTTPRequestHandler):
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: issubclass() arg 1 must be a class
+Python process exited with exit status: 1. The logs above can help with debugging the issue.","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N3MSA1PHFYDWWP87EA60Y1","",-1
+"2025-10-15 23:35:19",1760571319617,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/favicon.ico","GET","",500,"sgdsn-1760571319539-c9e860b69b0a","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",780,"iad1",75,2048,"","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N3MSA1PHFYDWWP87EA60Y1","",1
+"2025-10-15 23:35:19",1760571319241,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/","GET","",-1,"xhjjb-1760571316268-b92083ca4145","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",-1,"iad1",-1,-1,"ℹ️  Usando pymssql (ambiente serverless)
+Traceback (most recent call last):
+File ""/var/task/vc__handler__python.py"", line 242, in <module>
+if not issubclass(base, BaseHTTPRequestHandler):
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: issubclass() arg 1 must be a class
+Python process exited with exit status: 1. The logs above can help with debugging the issue.
+Traceback (most recent call last):
+File ""/var/task/vc__handler__python.py"", line 242, in <module>
+if not issubclass(base, BaseHTTPRequestHandler):
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: issubclass() arg 1 must be a class
+ℹ️  Usando pymssql (ambiente serverless)
+Python process exited with exit status: 1. The logs above can help with debugging the issue.","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N3MP3HWTKFRJ0Y6KZV0SJN","",-1
+"2025-10-15 23:35:16",1760571316337,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/","GET","",500,"xhjjb-1760571316268-b92083ca4145","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",795,"iad1",75,2048,"","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N3MP3HWTKFRJ0Y6KZV0SJN","",1
+"2025-10-15 23:18:09",1760570289717,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/favicon.png","GET","",-1,"mg2xp-1760570288897-ade7f0e4688e","vercel-favicon/1.0","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",-1,"iad1",-1,-1,"ℹ️  Usando pymssql (ambiente serverless)
+Traceback (most recent call last):
+File ""/var/task/vc__handler__python.py"", line 242, in <module>
+if not issubclass(base, BaseHTTPRequestHandler):
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: issubclass() arg 1 must be a class
+Python process exited with exit status: 1. The logs above can help with debugging the issue.","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2NAS8CSJHQ6AP4B2MXZ0K","",-1
+"2025-10-15 23:18:08",1760570288936,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/favicon.png","GET","",500,"mg2xp-1760570288897-ade7f0e4688e","vercel-favicon/1.0","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",760,"iad1",75,2048,"","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2NAS8CSJHQ6AP4B2MXZ0K","",1
+"2025-10-15 23:18:06",1760570286753,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/favicon.png","GET","",-1,"4xjxc-1760570285943-8080cf4d52d0","vercel-favicon/1.0","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",-1,"iad1",-1,-1,"Traceback (most recent call last):
+File ""/var/task/vc__handler__python.py"", line 242, in <module>
+if not issubclass(base, BaseHTTPRequestHandler):
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: issubclass() arg 1 must be a class
+ℹ️  Usando pymssql (ambiente serverless)
+Python process exited with exit status: 1. The logs above can help with debugging the issue.","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2N7WYKH4TK1N1PA1RNEXP","",-1
+"2025-10-15 23:18:05",1760570285982,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/favicon.png","GET","",500,"4xjxc-1760570285943-8080cf4d52d0","vercel-favicon/1.0","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",759,"iad1",75,2048,"","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2N7WYKH4TK1N1PA1RNEXP","",1
+"2025-10-15 23:18:04",1760570284894,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/favicon.png","GET","",-1,"jfdz8-1760570284093-985a5ebd0072","vercel-favicon/1.0","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",-1,"iad1",-1,-1,"Traceback (most recent call last):
+File ""/var/task/vc__handler__python.py"", line 242, in <module>
+if not issubclass(base, BaseHTTPRequestHandler):
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: issubclass() arg 1 must be a class
+ℹ️  Usando pymssql (ambiente serverless)
+Python process exited with exit status: 1. The logs above can help with debugging the issue.","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2N634VAC6TAG7WHG5H3Z9","",-1
+"2025-10-15 23:18:04",1760570284132,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/favicon.png","GET","",500,"jfdz8-1760570284093-985a5ebd0072","vercel-favicon/1.0","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",745,"iad1",75,2048,"","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2N634VAC6TAG7WHG5H3Z9","",1
+"2025-10-15 23:18:04",1760570284053,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/favicon.ico","GET","",-1,"sjcnr-1760570283239-23352ccbf171","vercel-favicon/1.0","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",-1,"iad1",-1,-1,"ℹ️  Usando pymssql (ambiente serverless)
+Traceback (most recent call last):
+File ""/var/task/vc__handler__python.py"", line 242, in <module>
+if not issubclass(base, BaseHTTPRequestHandler):
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: issubclass() arg 1 must be a class
+Python process exited with exit status: 1. The logs above can help with debugging the issue.","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2N58JJ5C12761G91N6CCW","",-1
+"2025-10-15 23:18:03",1760570283282,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/favicon.ico","GET","",500,"sjcnr-1760570283239-23352ccbf171","vercel-favicon/1.0","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",755,"iad1",75,2048,"","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2N58JJ5C12761G91N6CCW","",1
+"2025-10-15 23:18:01",1760570281131,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/favicon.ico","GET","",-1,"nk2x7-1760570280330-7b5179a99c2e","vercel-favicon/1.0","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",-1,"iad1",-1,-1,"Traceback (most recent call last):
+File ""/var/task/vc__handler__python.py"", line 242, in <module>
+if not issubclass(base, BaseHTTPRequestHandler):
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: issubclass() arg 1 must be a class
+ℹ️  Usando pymssql (ambiente serverless)
+Python process exited with exit status: 1. The logs above can help with debugging the issue.","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2N2DHEGS3S0E4RECG6JR8","",-1
+"2025-10-15 23:18:00",1760570280369,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/favicon.ico","GET","",500,"nk2x7-1760570280330-7b5179a99c2e","vercel-favicon/1.0","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",744,"iad1",75,2048,"","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2N2DHEGS3S0E4RECG6JR8","",1
+"2025-10-15 23:17:59",1760570279263,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/favicon.ico","GET","",-1,"cmdvv-1760570278459-eb522bcddbec","vercel-favicon/1.0","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",-1,"iad1",-1,-1,"ℹ️  Usando pymssql (ambiente serverless)
+Traceback (most recent call last):
+File ""/var/task/vc__handler__python.py"", line 242, in <module>
+if not issubclass(base, BaseHTTPRequestHandler):
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: issubclass() arg 1 must be a class
+Python process exited with exit status: 1. The logs above can help with debugging the issue.","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2N0K46DE7CTFSGVYQ7VYN","",-1
+"2025-10-15 23:17:58",1760570278500,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/favicon.ico","GET","",500,"cmdvv-1760570278459-eb522bcddbec","vercel-favicon/1.0","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",741,"iad1",75,2048,"","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2N0K46DE7CTFSGVYQ7VYN","",1
+"2025-10-15 23:17:58",1760570278307,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/","GET","",-1,"69mnh-1760570277515-a4dc6bd7d3f4","vercel-favicon/1.0","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",-1,"iad1",-1,-1,"Traceback (most recent call last):
+File ""/var/task/vc__handler__python.py"", line 242, in <module>
+if not issubclass(base, BaseHTTPRequestHandler):
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: issubclass() arg 1 must be a class
+ℹ️  Usando pymssql (ambiente serverless)
+Python process exited with exit status: 1. The logs above can help with debugging the issue.","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2MZNPZHF8VCJZ80G48XSX","",-1
+"2025-10-15 23:17:58",1760570278051,"nexum-back-end.vercel.app/favicon.ico","GET","",-1,"6fpzf-1760570277200-56fdd720c47c","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36","error","production","","","lambda","/api/index.py","nexum-back-end.vercel.app","nexum-back-end.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",-1,"iad1",-1,-1,"Traceback (most recent call last):
+File ""/var/task/vc__handler__python.py"", line 242, in <module>
+if not issubclass(base, BaseHTTPRequestHandler):
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: issubclass() arg 1 must be a class
+ℹ️  Usando pymssql (ambiente serverless)
+Python process exited with exit status: 1. The logs above can help with debugging the issue.","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2MZCY20VVBA108Y5R1Y7N","",-1
+"2025-10-15 23:17:57",1760570277558,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/","GET","",500,"69mnh-1760570277515-a4dc6bd7d3f4","vercel-favicon/1.0","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",736,"iad1",75,2048,"","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2MZNPZHF8VCJZ80G48XSX","",1
+"2025-10-15 23:17:57",1760570277278,"nexum-back-end.vercel.app/favicon.ico","GET","",500,"6fpzf-1760570277200-56fdd720c47c","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36","error","production","","","lambda","/api/index.py","nexum-back-end.vercel.app","nexum-back-end.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",758,"iad1",75,2048,"","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2MZCY20VVBA108Y5R1Y7N","",1
+"2025-10-15 23:17:56",1760570276904,"nexum-back-end.vercel.app/","GET","",-1,"5l7dx-1760570276059-30b73eedfe41","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36","error","production","","","lambda","/api/index.py","nexum-back-end.vercel.app","nexum-back-end.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",-1,"iad1",-1,-1,"Traceback (most recent call last):
+File ""/var/task/vc__handler__python.py"", line 242, in <module>
+if not issubclass(base, BaseHTTPRequestHandler):
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: issubclass() arg 1 must be a class
+ℹ️  Usando pymssql (ambiente serverless)
+Python process exited with exit status: 1. The logs above can help with debugging the issue.","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2MY8WZKX079SRD9NJC284","",-1
+"2025-10-15 23:17:56",1760570276465,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/","GET","",-1,"7lzlr-1760570275670-0704cf21b6d1","vercel-favicon/1.0","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",-1,"iad1",-1,-1,"ℹ️  Usando pymssql (ambiente serverless)
+Traceback (most recent call last):
+File ""/var/task/vc__handler__python.py"", line 242, in <module>
+if not issubclass(base, BaseHTTPRequestHandler):
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: issubclass() arg 1 must be a class
+Python process exited with exit status: 1. The logs above can help with debugging the issue.","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2MXW45TX96D8SD8SKEB8N","",-1
+"2025-10-15 23:17:56",1760570276124,"nexum-back-end.vercel.app/","GET","",500,"5l7dx-1760570276059-30b73eedfe41","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36","error","production","","","lambda","/api/index.py","nexum-back-end.vercel.app","nexum-back-end.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",765,"iad1",75,2048,"","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2MY8WZKX079SRD9NJC284","",1
+"2025-10-15 23:17:55",1760570275716,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/","GET","",500,"7lzlr-1760570275670-0704cf21b6d1","vercel-favicon/1.0","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",735,"iad1",75,2048,"","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2MXW45TX96D8SD8SKEB8N","",1
+"2025-10-15 23:17:31",1760570251526,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/favicon.ico","GET","",-1,"p94z9-1760570250479-2b152032813f","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",-1,"iad1",-1,-1,"ℹ️  Usando pymssql (ambiente serverless)
+Traceback (most recent call last):
+File ""/var/task/vc__handler__python.py"", line 242, in <module>
+if not issubclass(base, BaseHTTPRequestHandler):
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: issubclass() arg 1 must be a class
+Python process exited with exit status: 1. The logs above can help with debugging the issue.","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2M5FQR4KGW7V0XDYYZ72W","",-1
+"2025-10-15 23:17:30",1760570250743,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/favicon.ico","GET","",500,"p94z9-1760570250479-2b152032813f","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",733,"iad1",75,2048,"","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2M5FQR4KGW7V0XDYYZ72W","",1
+"2025-10-15 23:17:30",1760570250264,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/docs","GET","",-1,"dzbhn-1760570249137-62bd6d2431e6","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",-1,"iad1",-1,-1,"Traceback (most recent call last):
+File ""/var/task/vc__handler__python.py"", line 242, in <module>
+if not issubclass(base, BaseHTTPRequestHandler):
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: issubclass() arg 1 must be a class
+ℹ️  Usando pymssql (ambiente serverless)
+Python process exited with exit status: 1. The logs above can help with debugging the issue.","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2M48KC7P2EE469M0CA3GT","",-1
+"2025-10-15 23:17:29",1760570249491,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/docs","GET","",500,"dzbhn-1760570249137-62bd6d2431e6","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",745,"iad1",75,2048,"","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2M48KC7P2EE469M0CA3GT","",1
+"2025-10-15 23:17:13",1760570233714,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/favicon.ico","GET","",-1,"5jdjg-1760570232904-b77e1965e5a5","vercel-screenshot/1.0","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",-1,"iad1",-1,-1,"Traceback (most recent call last):
+File ""/var/task/vc__handler__python.py"", line 242, in <module>
+if not issubclass(base, BaseHTTPRequestHandler):
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: issubclass() arg 1 must be a class
+ℹ️  Usando pymssql (ambiente serverless)
+Python process exited with exit status: 1. The logs above can help with debugging the issue.","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2KM3GDGY9GBHJSV5ZNWRY","",-1
+"2025-10-15 23:17:13",1760570233144,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/favicon.ico","GET","",-1,"khj57-1760570232165-a99d95f8ce95","vercel-screenshot/1.0","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",-1,"iad1",-1,-1,"ℹ️  Usando pymssql (ambiente serverless)
+Traceback (most recent call last):
+File ""/var/task/vc__handler__python.py"", line 242, in <module>
+if not issubclass(base, BaseHTTPRequestHandler):
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: issubclass() arg 1 must be a class
+Python process exited with exit status: 1. The logs above can help with debugging the issue.","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2KKFKPMFBMA2ARXX625FW","",-1
+"2025-10-15 23:17:12",1760570232944,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/favicon.ico","GET","",500,"5jdjg-1760570232904-b77e1965e5a5","vercel-screenshot/1.0","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",754,"iad1",75,2048,"","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2KM3GDGY9GBHJSV5ZNWRY","",1
+"2025-10-15 23:17:12",1760570232307,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/favicon.ico","GET","",500,"khj57-1760570232165-a99d95f8ce95","vercel-screenshot/1.0","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",818,"iad1",75,2048,"","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2KKFKPMFBMA2ARXX625FW","",1
+"2025-10-15 23:17:12",1760570232113,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/","GET","",-1,"rwtkx-1760570231098-fad8c85454d2","vercel-screenshot/1.0","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",-1,"iad1",-1,-1,"Traceback (most recent call last):
+File ""/var/task/vc__handler__python.py"", line 242, in <module>
+if not issubclass(base, BaseHTTPRequestHandler):
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: issubclass() arg 1 must be a class
+ℹ️  Usando pymssql (ambiente serverless)
+Python process exited with exit status: 1. The logs above can help with debugging the issue.","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2KJFHTJH9K8304XM69RZD","",-1
+"2025-10-15 23:17:12",1760570232095,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/","GET","",-1,"fvzvb-1760570231281-c7aa3cc0341d","vercel-screenshot/1.0","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",-1,"iad1",-1,-1,"ℹ️  Usando pymssql (ambiente serverless)
+Traceback (most recent call last):
+File ""/var/task/vc__handler__python.py"", line 242, in <module>
+if not issubclass(base, BaseHTTPRequestHandler):
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: issubclass() arg 1 must be a class
+Python process exited with exit status: 1. The logs above can help with debugging the issue.","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2KJGWHV63Y0N6RNYSBQYY","",-1
+"2025-10-15 23:17:11",1760570231324,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/","GET","",500,"fvzvb-1760570231281-c7aa3cc0341d","vercel-screenshot/1.0","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",755,"iad1",76,2048,"","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2KJGWHV63Y0N6RNYSBQYY","",1
+"2025-10-15 23:17:11",1760570231281,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/","GET","",500,"rwtkx-1760570231098-fad8c85454d2","vercel-screenshot/1.0","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",814,"iad1",76,2048,"","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2KJFHTJH9K8304XM69RZD","",1
+"2025-10-15 23:17:11",1760570231162,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/","GET","",-1,"fv9l2-1760570228513-cc54cad1587c","vercel-screenshot/1.0","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",-1,"iad1",-1,-1,"ℹ️  Usando pymssql (ambiente serverless)
+Traceback (most recent call last):
+File ""/var/task/vc__handler__python.py"", line 242, in <module>
+if not issubclass(base, BaseHTTPRequestHandler):
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: issubclass() arg 1 must be a class
+Python process exited with exit status: 1. The logs above can help with debugging the issue.
+Traceback (most recent call last):
+File ""/var/task/vc__handler__python.py"", line 242, in <module>
+if not issubclass(base, BaseHTTPRequestHandler):
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: issubclass() arg 1 must be a class
+ℹ️  Usando pymssql (ambiente serverless)
+Python process exited with exit status: 1. The logs above can help with debugging the issue.","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2KG09X6J1FW7GDT0FX994","",-1
+"2025-10-15 23:17:10",1760570230935,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/","GET","",-1,"jmb4m-1760570228486-e07b382863b5","vercel-screenshot/1.0","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",-1,"iad1",-1,-1,"ℹ️  Usando pymssql (ambiente serverless)
+Traceback (most recent call last):
+File ""/var/task/vc__handler__python.py"", line 242, in <module>
+if not issubclass(base, BaseHTTPRequestHandler):
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: issubclass() arg 1 must be a class
+Python process exited with exit status: 1. The logs above can help with debugging the issue.
+Traceback (most recent call last):
+File ""/var/task/vc__handler__python.py"", line 242, in <module>
+if not issubclass(base, BaseHTTPRequestHandler):
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: issubclass() arg 1 must be a class
+ℹ️  Usando pymssql (ambiente serverless)
+Python process exited with exit status: 1. The logs above can help with debugging the issue.","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2KG08PC4RS2K5Q1PRZNXQ","",-1
+"2025-10-15 23:17:08",1760570228745,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/","GET","",500,"fv9l2-1760570228513-cc54cad1587c","vercel-screenshot/1.0","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",828,"iad1",75,2048,"","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2KG09X6J1FW7GDT0FX994","",1
+"2025-10-15 23:17:08",1760570228744,"nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app/","GET","",500,"jmb4m-1760570228486-e07b382863b5","vercel-screenshot/1.0","error","production","","","lambda","/api/index.py","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","nexum-back-rig1ye3e9-abraao-santos-projects.vercel.app","dpl_GpoG9q36NWosoFRZjiiPnLYEPrez",784,"iad1",76,2048,"","prj_khrI4LFkatvnm0Wb3jRTiVXOd3d6","","","01K7N2KG08PC4RS2K5Q1PRZNXQ","",1

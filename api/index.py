@@ -39,14 +39,4 @@ def home():
         'spec': '/swagger.json'
     })
 
-# Handler para Vercel
-handler = app
 
-if __name__ == '__main__':
-    print('\n' + '='*80)
-    print('NEXUM SUPPLY CHAIN API'.center(80))
-    print('='*80)
-    print('\nServidor: http://localhost:5000')
-    print('Documentação: http://localhost:5000/docs\n')
-    print('='*80 + '\n')
-    app.run(debug=True, host='0.0.0.0', port=5000)
