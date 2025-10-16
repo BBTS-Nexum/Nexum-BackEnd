@@ -5,7 +5,7 @@ load_dotenv()
 
 # Usar mssql (mssql-python) que já está instalado e funciona em serverless
 try:
-    import mssql
+    from mssql_python import mssql
     USE_MSSQL = True
     print("ℹ️  Usando mssql-python")
 except ImportError:
