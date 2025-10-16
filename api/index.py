@@ -19,7 +19,7 @@ swaggerui_blueprint = get_swaggerui_blueprint(
     }
 )
 
-app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
+app.register_blueprint(swaggerui_blueprint)
 app.register_blueprint(user_bp)
 app.register_blueprint(produto_bp)
 
